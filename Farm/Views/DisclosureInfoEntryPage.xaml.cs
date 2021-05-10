@@ -39,10 +39,11 @@ namespace Farm.Views
                 // Retrieve the note and set it as the BindingContext of the page.
                 DisclosureInfomation note = new DisclosureInfomation
                 {
-                    Filename = filename,
-                    Text = File.ReadAllText(filename),
-                    Date = File.GetCreationTime(filename)
+                    //Filename = filename,
+                    //Text = File.ReadAllText(filename),
+                    //Date = File.GetCreationTime(filename)
                 };
+
                 BindingContext = note;
             }
             catch (Exception)
@@ -67,7 +68,7 @@ namespace Farm.Views
                // File.WriteAllText(note.Filename, note.Text);
             }
 
-            // Navigate backwards
+            //이전페이지로 이동
             await Shell.Current.GoToAsync("..");
         }
 
@@ -75,11 +76,11 @@ namespace Farm.Views
         {
             var note = (DisclosureInfomation)BindingContext;
 
-            // Delete the file.
-            if (File.Exists(note.Filename))
-            {
-                File.Delete(note.Filename);
-            }
+            //// Delete the file.
+            //if (File.Exists(note.Filename))
+            //{
+            //    File.Delete(note.Filename);
+            //}
 
             // Navigate backwards
             await Shell.Current.GoToAsync("..");

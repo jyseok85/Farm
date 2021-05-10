@@ -4,12 +4,28 @@
        xmlns:views="clr-namespace:Farm.Views"
        x:Class="Farm.AppShell">
 
-    <TabBar>
-        <ShellContent Title="Farm"
+
+    <!--<ShellContent Title="Title"
                       Icon="icon_feed.png"
-                      ContentTemplate="{DataTemplate views:FarmPage}" />
-        <ShellContent Title="About"
-                      Icon="icon_about.png"
-                      ContentTemplate="{DataTemplate views:AboutPage}" />
+                      ContentTemplate="{DataTemplate views:TitlePage}" 
+                  FlyoutItemIsVisible="False"
+                  IsEnabled="False"/>-->
+
+    <ShellContent Title="About"
+                    Icon="icon_about.png"
+                    ContentTemplate="{DataTemplate views:AboutPage}" />
+        
+    <ShellContent Title="공시 유기농업자재 조회"
+                        Icon="icon_feed.png"
+                        ContentTemplate="{DataTemplate views:FarmPage}" />
+    <ShellContent Title="행정처분현황 조회(지원예정)"
+                        Icon="icon_feed.png"
+                        ContentTemplate="{DataTemplate views:FarmPage}" />
+
+
+
+    <!--//이놈이였구만, 처음에 ShellContent 첫번째 항목이 보여짐-->
+    <TabBar>
+        
     </TabBar>
 </Shell>
