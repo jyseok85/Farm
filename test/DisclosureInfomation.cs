@@ -7,6 +7,8 @@ namespace Farm.Models
 {
     public class DisclosureInfomation
     {
+        public string ROW_NUM { get; set; }
+
         [JsonProperty("PBLNTF_ID")]
         public string 공시ID{ get; set; }
         [JsonProperty("PBLNTF_NO")]

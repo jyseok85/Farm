@@ -17,13 +17,13 @@ namespace Farm
             FolderPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData));
 
             AppDataPath = Path.Combine(FileSystem.AppDataDirectory, "text.txt");
-            MainPage = new TitlePage();
+            MainPage = new LoadingPage();
 
         }
 
         protected async override void OnStart()
         {
-            await ((TitlePage)MainPage).UpdateData();
+            await ((LoadingPage)MainPage).UpdateData();
             MainPage = new AppShell();
 
         }

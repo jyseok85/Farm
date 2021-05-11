@@ -15,7 +15,7 @@ namespace Farm
             Routing.RegisterRoute(nameof(DisclosureInfoEntryPage), typeof(DisclosureInfoEntryPage));
             Routing.RegisterRoute(nameof(FarmPage), typeof(FarmPage));
             Routing.RegisterRoute(nameof(AboutPage), typeof(AboutPage));
-            Routing.RegisterRoute(nameof(TitlePage), typeof(TitlePage));
+            //Routing.RegisterRoute(nameof(LoadingPage), typeof(LoadingPage));
         }
     }
 }
