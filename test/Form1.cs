@@ -25,19 +25,12 @@ namespace test
             cc = JsonConvert.DeserializeObject<List<DisclosureInfomation>> (data);
             dd = JsonConvert.DeserializeObject<List<Dictionary<string, string>>>(data);
 
-            //Stopwatch sw = new Stopwatch();
-            //sw.Start();
+            SearchProperty sp = new SearchProperty();
+            sp.제조업체명 = "팜스";
+            sp.공시종료 = "20210101";
+            cc = SearchText(sp);
 
-            //var matches = dd.AsParallel().Where(s => s.Keys.Equals("ROW_NUM")).Where(s => s.Values.Any(x => x.Contains("1"))).ToList();
-            //matches = dd.AsParallel().Where(s => s.Keys.Any(x => x.Equals("ROW_NUM")) and .Any(x => x.Contains("1"))).ToList();
-            //sw.Stop();
-            //Console.WriteLine(sw.ElapsedMilliseconds);
-
-
-            dd = SearchAllText("팜스");
-
-            dd = SearchText("제조업체명", "팜스");
-
+        
         }
 
         List<DisclosureInfomation> cc = new List<DisclosureInfomation>();
@@ -142,33 +135,86 @@ namespace test
             return File.ReadAllText(localPath);
         }
 
-        private List<Dictionary<string,string>> SearchAllText(string text)
+        //private List<Dictionary<string,string>> SearchAllText(string text)
+        //{
+        //    Stopwatch sw = new Stopwatch();
+        //    sw.Start();
+            
+        //    //속도가 10배이상 느림
+        //    var matches = dd.AsParallel().Where(s => s.Values.Any(x => x.Contains(text))).ToList();
+
+        //    sw.Stop();
+        //    Console.WriteLine("2 - " + sw.ElapsedMilliseconds);
+
+        //    return matches;
+        //}
+
+        private List<DisclosureInfomation> SearchAllText(string text)
         {
             Stopwatch sw = new Stopwatch();
             sw.Start();
 
-            var matches = dd.AsParallel().Where(s => s.Values.Any(x => x.Contains(text))).ToList();
-            sw.Stop();
-            Console.WriteLine(sw.ElapsedMilliseconds);
+            var matches = cc.Where(x=> x.공시번호.Contains(text) 
+                                    || x.자재구분.Contains(text) 
+                                    || x.자재명칭.Contains(text) 
+                                    || x.상표명.Contains(text) 
+                                    || x.제조업체명.Contains(text) 
+                                    || x.대표자명.Contains(text) 
+                                    || x.사업장주소.Contains(text) 
+                                    || x.관리기관명.Contains(text)).OrderBy(x => x.공시번호).ToList();
 
+            sw.Stop();
+            Console.WriteLine("SearchAll : " + sw.ElapsedMilliseconds);
             return matches;
         }
-        private List<Dictionary<string, string>> SearchText(string key, string text)
+        private List<DisclosureInfomation> SearchText(SearchProperty property)
         {
             Stopwatch sw = new Stopwatch();
-            sw.Start();
-            if (key == "제조업체명")
+
+            int start_date;
+            int end_date;
+            if (property.공시시작 != string.Empty)
+                start_date = int.Parse(property.공시시작);
+            else
+                start_date = int.Parse("19000101");
+
+            if (property.공시종료 != string.Empty)
+                end_date = int.Parse(property.공시종료);
+            else
+                end_date = int.Parse("21000101");
+
+            int 공시목록기준일 = start_date;
+            int 기간만료기준일 = end_date;
+            if (property.지정상태 == 지정상태.공시목록)
             {
-                var matches = cc.AsParallel().Where(s => s.제조업체명.Contains(text)).OrderBy(x => x.공시번호).ToList();
+                공시목록기준일 = int.Parse(DateTime.Now.Date.ToString("yyyyMMdd"));
+            }
+            else if(property.지정상태 == 지정상태.기간만료)
+            {
+                기간만료기준일 = int.Parse(DateTime.Now.Date.ToString("yyyyMMdd"));
             }
 
-            var a = cc.Where(x => x.공시번호.Contains(text) || x.자재구분.Contains(text) || x.자재명칭.Contains(text) || x.상표명.Contains(text) || x.제조업체명.Contains(text) || x.대표자명.Contains(text) || x.사업장주소.Contains(text) || x.관리기관명.Contains(text)).ToList();
-            //var matches = dd.AsParallel().Where(s => s.Values.Any(x => x.Contains(text))).ToList();
+            sw.Start();
+            var matches = cc.Where(x => x.공시번호.Contains(property.공시번호) 
+                                && x.자재구분.Contains(property.자재구분) 
+                                && x.자재명칭.Contains(property.자재명칭) 
+                                && x.상표명.Contains(property.상표명) 
+                                && x.제조업체명.Contains(property.제조업체명) 
+                                && x.대표자명.Contains(property.대표자명) 
+                                && x.사업장주소.Contains(property.사업장주소) 
+                                && x.관리기관명.Contains(property.관리기관명)
+                                //&& x.시험작물또는병충해.Contains(property.시험작물또는병충해) <-- 추가된다면..
+                                && int.Parse(x.공시시작) >= start_date
+                                && int.Parse(x.공시종료) <= end_date
+                                && int.Parse(x.공시종료) >= 공시목록기준일 //공시종료가 오늘날짜보다 이후목록만 조회 값이 없을경우 초기값으로 전체조회됨
+                                && int.Parse(x.공시종료) <= 기간만료기준일 //공시종료가 오늘날짜보다 이전목록만 조회 값이 없을경우 초기값으로 전체조회됨0
+                                )
+                                .OrderBy(x => x.공시번호).ToList();
+
             sw.Stop();
-            Console.WriteLine(sw.ElapsedMilliseconds);
+            Console.WriteLine("Search : " + sw.ElapsedMilliseconds);
 
-
-            return null;
+            return matches;
 
         }
         private async void 기초데이터만들기()

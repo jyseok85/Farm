@@ -5,7 +5,7 @@
              x:Class="Farm.Views.LoadingPage">
     <ContentPage.Content>
         <StackLayout>
-            <Label Text="Welcome to Xamarin.Forms! 데이터 로딩 후에 탭바가 보여집니다."
+            <Label x:Name="StatusMessage" Text="Welcome to Xamarin.Forms! 데이터 로딩 후에 탭바가 보여집니다."
                 VerticalOptions="CenterAndExpand" 
                 HorizontalOptions="CenterAndExpand" />
         </StackLayout>
