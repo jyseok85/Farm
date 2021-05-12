@@ -22,8 +22,8 @@ namespace Farm.Views
             InitializeComponent();
         }
 
-        //private const string installedDataName = "initdata.json";
-        private const string installedDataName = "test.txt";
+        private const string installedDataName = "initdata.json";
+        //private const string installedDataName = "test.txt";
 
         private const string API_KEY = "Grid_20200929000000000606_1";
         /// <summary>
@@ -52,6 +52,7 @@ namespace Farm.Views
                 await Task.Delay(5000);
 
                 data = await LoadInstalledData();
+                Save(data);
             }
             else
             {
@@ -82,16 +83,20 @@ namespace Farm.Views
             }
 
             //현재 저장된 갯수보다 서버에 데이터가 많을 경우에 추가된 데이터를 조회한다. 
-            List<DisclosureInfomation> updated = await GetUpdatedData(savedData.Count, serverDataCount);
-
-            //기존 데이터에 추가한다. 로컬 스토리지에 저장한다. 
-            if (updated.Count > 0)
+            if (serverDataCount > savedData.Count)
             {
-                savedData.AddRange(updated);
+                List<DisclosureInfomation> updated = await GetUpdatedData(savedData.Count, serverDataCount);
 
-                string jsonStr = JsonConvert.SerializeObject(savedData);
-                Save(jsonStr);
+                //기존 데이터에 추가한다. 로컬 스토리지에 저장한다. 
+                if (updated.Count > 0)
+                {
+                    savedData.AddRange(updated);
+
+                    string jsonStr = JsonConvert.SerializeObject(savedData);
+                    Save(jsonStr);
+                }
             }
+
             App.DisInfo = savedData;
         }
 
