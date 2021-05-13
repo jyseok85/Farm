@@ -6,11 +6,11 @@
              x:Class="Farm.Views.LoadingPage">
     <ContentPage.Content>
         <StackLayout>
-            <Image Source="{local:ImageResource Farm.Resources.background.jpg}"
-                   Aspect ="Fill"
-                   VerticalOptions="CenterAndExpand"/>
-            <StackLayout>
 
+            <Image Source="{local:ImageResource Farm.Resources.background.jpg}"
+                    Aspect ="Fill"
+                    VerticalOptions="CenterAndExpand"/>
+            <StackLayout>
                 <BoxView BackgroundColor="Red"
                      HeightRequest="1" />
                 <ActivityIndicator IsRunning="True" 
