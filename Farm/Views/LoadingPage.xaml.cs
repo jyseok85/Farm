@@ -22,8 +22,8 @@ namespace Farm.Views
             InitializeComponent();
         }
 
-        private const string installedDataName = "initdata.json";
-        //private const string installedDataName = "test.txt";
+        //private const string installedDataName = "initdata.json";
+        private const string installedDataName = "inittest.json";
 
         private const string API_KEY = "Grid_20200929000000000606_1";
         /// <summary>
@@ -57,6 +57,8 @@ namespace Farm.Views
             else
             {
                 StatusMessage.Text = "저장된 데이터 불러오는 중..";
+                await Task.Delay(5000);
+
                 //마지막 저장된 데이터 로드
                 data = LoadSavedData();
 
@@ -65,7 +67,7 @@ namespace Farm.Views
                     data = await LoadInstalledData();
                 }
             }
-
+            return;
             List<DisclosureInfomation> savedData = JsonConvert.DeserializeObject<List<DisclosureInfomation>>(data);
 
             //서버에서 데이터를 조회한다.(카운트)
@@ -74,8 +76,12 @@ namespace Farm.Views
             {
                 StatusMessage.Text = "서버에서 최신 데이터를 가져옵니다.";
                 serverDataCount = await GetServerDataTotalCount();
+                await Task.Delay(1000);
+
+                //마지막 Row Num 을 조회해서 일치하는지 확인할수도 있고, 
+                //저장된거의 마지막 RowNum 과 비교해서 받을수도 있는데, 저 Row Num 이 db에서 자동생성값이 아니라. 실제 row index 일경우에는 역시 틀어지고,, 그냥 안할랜다.
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 Debug.WriteLine("\tERROR {0}", ex.Message);
                 StatusMessage.Text = "서버접속 실패.. 로컬 데이터를 사용합니다.";
@@ -85,7 +91,12 @@ namespace Farm.Views
             //현재 저장된 갯수보다 서버에 데이터가 많을 경우에 추가된 데이터를 조회한다. 
             if (serverDataCount > savedData.Count)
             {
-                List<DisclosureInfomation> updated = await GetUpdatedData(savedData.Count, serverDataCount);
+                StatusMessage.Text = "데이터를 업데이트중 입니다.";
+                await Task.Delay(1000);
+                int lastSaveRow;
+                int.TryParse(savedData[savedData.Count -1].ROW_NUM, out lastSaveRow);
+
+                List<DisclosureInfomation> updated = await GetUpdatedData(lastSaveRow + 1, serverDataCount);
 
                 //기존 데이터에 추가한다. 로컬 스토리지에 저장한다. 
                 if (updated.Count > 0)
@@ -96,7 +107,9 @@ namespace Farm.Views
                     Save(jsonStr);
                 }
             }
+            StatusMessage.Text = "작업 완료";
 
+            await Task.Delay(3000);
             App.DisInfo = savedData;
         }
 

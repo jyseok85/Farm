@@ -2,12 +2,27 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              Shell.TabBarIsVisible="False"
+             xmlns:local ="clr-namespace:Farm"
              x:Class="Farm.Views.LoadingPage">
     <ContentPage.Content>
         <StackLayout>
-            <Label x:Name="StatusMessage" Text="Welcome to Xamarin.Forms! 데이터 로딩 후에 탭바가 보여집니다."
-                VerticalOptions="CenterAndExpand" 
-                HorizontalOptions="CenterAndExpand" />
+            <Image Source="{local:ImageResource Farm.Resources.background.jpg}"
+                   Aspect ="Fill"
+                   VerticalOptions="CenterAndExpand"/>
+            <StackLayout>
+
+                <BoxView BackgroundColor="Red"
+                     HeightRequest="1" />
+                <ActivityIndicator IsRunning="True" 
+                       VerticalOptions="CenterAndExpand" />
+                <BoxView BackgroundColor="Red"
+                     HeightRequest="1" />
+                <Label x:Name="StatusMessage" Text="Welcome to Xamarin.Forms! 데이터 로딩 후에 탭바가 보여집니다."
+                    VerticalOptions="CenterAndExpand" 
+                    HorizontalOptions="CenterAndExpand" />
+                <BoxView BackgroundColor="Red"
+                     HeightRequest="1" />
+            </StackLayout>
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

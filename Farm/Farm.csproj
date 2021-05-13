@@ -7,16 +7,22 @@
 
   <ItemGroup>
     <None Remove="data.json" />
+    <None Remove="Resources\background.jpg" />
   </ItemGroup>
 
   <ItemGroup>
     <EmbeddedResource Include="data.json" />
+    <EmbeddedResource Include="Resources\logo.jpg" />
   </ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
     <PackageReference Include="Xamarin.Forms" Version="5.0.0.2012" />  
     <PackageReference Include="Xamarin.Essentials" Version="1.6.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="Resources\background.jpg" />
   </ItemGroup>
 
   <ItemGroup>
