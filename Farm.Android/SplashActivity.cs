@@ -17,13 +17,6 @@ namespace Farm.Droid
     {
         static readonly string TAG = "X:" + typeof (SplashActivity).Name;
 
-        //public override void OnCreate(Bundle savedInstanceState, PersistableBundle persistentState)
-        //{
-        //    base.OnCreate(savedInstanceState, persistentState);
-
-        //    SetContentView(Resource.Layout.Splash);
-        //    FindViewById<TextView>(Resource.Id.txtAppVersion).Text = $"Version {PackageManager.GetPackageInfo(PackageName, 0).VersionName}";
-        //}
         protected override void OnCreate(Bundle savedInstanceState)
         {
             base.OnCreate(savedInstanceState);
