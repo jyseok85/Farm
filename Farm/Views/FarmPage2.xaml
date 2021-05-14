@@ -2,11 +2,7 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="Farm.Views.FarmPage2"
-             Title="행정처분현황 조회">
-    <ContentPage.ToolbarItems>
-        <ToolbarItem Text="Add"
-                     Clicked="OnAddClicked" />
-    </ContentPage.ToolbarItems>
+             NavigationPage.HasNavigationBar="False">
 
     <!-- Display notes in a list -->
     <CollectionView x:Name="collectionView"

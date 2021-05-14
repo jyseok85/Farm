@@ -2,13 +2,16 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="Farm.Views.FarmPage"
-             Title="행정처분현황 조회">
-    <ContentPage.ToolbarItems>
-        <ToolbarItem Text="Add"
-                     Clicked="OnAddClicked" />
-    </ContentPage.ToolbarItems>
+             xmlns:controls="clr-namespace:Farm.Controls"
+             >
+    <Shell.SearchHandler>
+        <controls:OrganicMaterialsSearchHandler Placeholder="Enter search term"
+                                                ShowsResults="true"
+                                                DisplayMemberName="Name" />
+    </Shell.SearchHandler>
+    <Label x:Name="StatusMessage" Text="This app is written in XAML and C# with the Xamarin Platform." />
 
-    <!-- Display notes in a list -->
+    <!-- Display notes in a list --><!--
     <CollectionView x:Name="collectionView"
                     Margin="20"
                     SelectionMode="Single"
@@ -17,7 +20,7 @@
             <LinearItemsLayout Orientation="Vertical"
                                ItemSpacing="10" />
         </CollectionView.ItemsLayout>
-        <!-- Define the appearance of each item in the list -->
+        --><!-- Define the appearance of each item in the list --><!--
         <CollectionView.ItemTemplate>
             <DataTemplate>
                 <StackLayout>
@@ -29,5 +32,5 @@
                 </StackLayout>
             </DataTemplate>
         </CollectionView.ItemTemplate>
-    </CollectionView>
+    </CollectionView>-->
 </ContentPage>

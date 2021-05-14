@@ -21,15 +21,18 @@ namespace Farm.Views
             //{
             //    editor.Text = File.ReadAllText(_fileName);
             //}
+
+
         }
 
         /// <summary>
         /// 페이지가 표시되면 
         /// </summary>
-        protected override void OnAppearing()
+        protected async override void OnAppearing()
         {
             base.OnAppearing();
-
+            Loading loading = new Loading();
+            await loading.InitDataSetting(StatusMessage);
           
 
             // Set the data source for the CollectionView to a

@@ -16,6 +16,7 @@ namespace Farm
             Routing.RegisterRoute(nameof(FarmPage), typeof(FarmPage));
             Routing.RegisterRoute(nameof(AboutPage), typeof(AboutPage));
             //Routing.RegisterRoute(nameof(LoadingPage), typeof(LoadingPage));
+
         }
     }
 }

@@ -47,7 +47,7 @@
                 if (File.Exists(App.AppDataPath) == false)
                 {
                     StatusMessage.Text = "초기 데이터 설정중..";
-                    await Task.Delay(5000);
+                    await Task.Delay(1000);
 
                     data = await LoadInstalledData();
                     Save(data);
@@ -55,7 +55,7 @@
                 else
                 {
                     StatusMessage.Text = "저장된 데이터 불러오는 중..";
-                    await Task.Delay(5000);
+                    await Task.Delay(1000);
 
                     //마지막 저장된 데이터 로드
                     data = LoadSavedData();
@@ -65,7 +65,6 @@
                         data = await LoadInstalledData();
                     }
                 }
-                return;
                 List<DisclosureInfomation> savedData = JsonConvert.DeserializeObject<List<DisclosureInfomation>>(data);
 
                 //서버에서 데이터를 조회한다.(카운트)
@@ -107,7 +106,7 @@
                 }
                 StatusMessage.Text = "작업 완료";
 
-                await Task.Delay(3000);
+                await Task.Delay(1000);
                 App.DisInfo = savedData;
             }
 

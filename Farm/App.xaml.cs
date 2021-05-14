@@ -13,7 +13,7 @@ namespace Farm
         public static string FolderPath { get; private set; }
         public static string AppDataPath { get; private set; }
 
-        public static List<DisclosureInfomation> DisInfo { get; set; }
+        public static IList<DisclosureInfomation> DisInfo { get; set; }
 
         public App()
         {
@@ -21,19 +21,20 @@ namespace Farm
             FolderPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData));
 
             AppDataPath = Path.Combine(FileSystem.AppDataDirectory, "data.json");
-            MainPage = new LoadingPage();
+            //MainPage = new LoadingPage();
 
+            MainPage = new AppShell();
+           
         }
 
-        protected async override void OnStart()
+        protected override void OnStart()
         {
-            await ((LoadingPage)MainPage).InitDataSetting();
-            MainPage = new AppShell();
-
+            //await ((LoadingPage)MainPage).InitDataSetting();
         }
 
         protected override void OnSleep()
         {
+
         }
 
         protected override void OnResume()
