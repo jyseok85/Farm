@@ -28,9 +28,7 @@ namespace Farm.Droid
         {
             base.OnCreate(savedInstanceState);
             SetContentView(Resource.Layout.Splash);
-
-            FindViewById<TextView>(Resource.Id.txtDescription).Text = $"Version {PackageManager.GetPackageInfo(PackageName, 0).VersionName}";
-
+            //FindViewById<TextView>(Resource.Id.txtDescription).Text = $"Version {PackageManager.GetPackageInfo(PackageName, 0).VersionName}";
         }
         // Launches the startup task
         protected override void OnResume()
@@ -46,12 +44,9 @@ namespace Farm.Droid
         // Simulates background work that happens behind the splash screen
         async void SimulateStartup()
         {
-            Loading page = new Loading();
-            //await page.InitDataSetting();
-
-            Log.Debug(TAG, "Performing some startup work that takes a bit of time.");
-            await Task.Delay(5000); // Simulate a bit of startup work.
-            Log.Debug(TAG, "Startup work is finished - starting MainActivity.");
+            //Log.Debug(TAG, "Performing some startup work that takes a bit of time.");
+            await Task.Delay(500); // Simulate a bit of startup work.
+            //Log.Debug(TAG, "Startup work is finished - starting MainActivity.");
             StartActivity(new Intent(Application.Context, typeof(MainActivity)));
         }
     }

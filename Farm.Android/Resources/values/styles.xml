@@ -9,6 +9,8 @@
 
   <style name="MyTheme.Splash" parent ="Theme.AppCompat.Light.NoActionBar">
     <item name="android:background">@color/splash_background</item>
+    <!--하단 바 색깔-->
+    <item name="android:navigationBarColor">@color/splash_background</item> 
     <item name="android:windowNoTitle">true</item>  
     <item name="android:windowFullscreen">true</item>  
     <item name="android:windowContentOverlay">@null</item>  
