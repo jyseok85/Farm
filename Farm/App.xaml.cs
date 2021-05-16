@@ -3,6 +3,7 @@ using Farm.Views;
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Threading.Tasks;
 using Xamarin.Essentials;
 using Xamarin.Forms;
 
@@ -40,6 +41,15 @@ namespace Farm
         protected override void OnResume()
         {
 
+        }
+
+        internal static async Task GetInitialData(Label label)
+        {
+            if (DisInfo == null)
+            {
+                Loading loading = new Loading();
+                await loading.InitDataSetting(label);
+            }
         }
     }
 }

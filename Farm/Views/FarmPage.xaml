@@ -3,14 +3,101 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="Farm.Views.FarmPage"
              xmlns:controls="clr-namespace:Farm.Controls"
+             xmlns:local ="clr-namespace:Farm"
              >
     <Shell.SearchHandler>
-        <controls:OrganicMaterialsSearchHandler Placeholder="Enter search term"
-                                                ShowsResults="true"
-                                                DisplayMemberName="Name" />
+        <controls:OrganicMaterialsSearchHandler Placeholder="검색"                                                
+                                            DisplayMemberName="Name" />
     </Shell.SearchHandler>
-    <Label x:Name="StatusMessage" Text="This app is written in XAML and C# with the Xamarin Platform." />
 
+
+    <StackLayout>
+        <Label x:Name="SearchLabel"
+               FontSize="Title"
+               TextColor="Black"
+               FontAttributes="Bold"
+               HeightRequest="30"
+               Margin="20,20,0,0"
+               Text="검색" />
+
+        <Grid
+            Margin="20,0,20,0"
+            ColumnSpacing="0"
+            >
+            <Grid.RowDefinitions>
+                <RowDefinition Height="36" />
+            </Grid.RowDefinitions>
+            
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="6*" /> 
+                <ColumnDefinition
+                    x:Name="CancelButton"
+                    Width="0" />
+            </Grid.ColumnDefinitions>
+            
+            <Frame 
+                Grid.Column="0"
+                CornerRadius = "10"
+                BackgroundColor = "#D2D2D2"
+                OutlineColor = "#D2D2D2"
+                Padding="1"
+                >
+                <!--<StackLayout Spacing="0" BackgroundColor="Red" Padding="0">-->
+                    <controls:SearchBarNoUnderline 
+                                   Focused="SearchBarNoUnderline_Focused"
+                                   Unfocused="SearchBarNoUnderline_Unfocused"
+                                   Placeholder="공시번호, 자재, 상표, 제조업체 등"
+                                   FontSize="Default"
+                                   BackgroundColor="Transparent"
+                                   Text="{Binding SearchText}"/>
+                <!--</StackLayout>-->
+                <!--<SearchBar
+                    BackgroundColor="#D2D2D2"
+                
+                    Placeholder="공시번호, 자재, 상표, 제조업체 등"/>-->
+            
+            </Frame>
+            <Button 
+                    Grid.Column="1"
+                    BackgroundColor="Transparent"
+                    Text="취소"
+                    VerticalOptions="Center"
+                    HorizontalOptions="Center"
+                    FontSize="Default"
+                    >
+                </Button>
+
+        </Grid>
+        <!--<Image Source="{local:ImageResource Farm.Resources.background.jpg}"
+                    Aspect ="Fill"
+                    VerticalOptions="CenterAndExpand"/>-->
+        <Frame  CornerRadius = "10"
+            HeightRequest = "160"
+            WidthRequest = "60"
+            BackgroundColor = "CornflowerBlue"
+            OutlineColor = "CornflowerBlue"
+            HorizontalOptions = "FillAndExpand"
+            VerticalOptions = "Center"
+            Margin = "20,10,20,10"
+            Padding="5"
+            >
+            <Label Text="최근 조회 정보" />
+        </Frame>
+        <Frame  CornerRadius = "10"
+            HeightRequest = "500"
+            WidthRequest = "60"
+            BackgroundColor = "CornflowerBlue"
+            OutlineColor = "CornflowerBlue"
+            HorizontalOptions = "FillAndExpand"
+            VerticalOptions = "Center"
+            Margin = "20,10,20,10"
+            Padding="5"
+            >
+        <Label Text="조회 이력..." />
+        </Frame>
+        <Label x:Name="StatusMessage" IsVisible="false" Text="This app is written in XAML and C# with the Xamarin Platform." />
+
+    </StackLayout>
     <!-- Display notes in a list --><!--
     <CollectionView x:Name="collectionView"
                     Margin="20"

@@ -9,6 +9,7 @@ using Android.Util;
 using Android.Content;
 using Farm.Models;
 using Android.Widget;
+using Android.Views;
 
 namespace Farm.Droid
 {
@@ -20,6 +21,7 @@ namespace Farm.Droid
         protected override void OnCreate(Bundle savedInstanceState)
         {
             base.OnCreate(savedInstanceState);
+            Window.DecorView.SystemUiVisibility = StatusBarVisibility.Hidden;
             SetContentView(Resource.Layout.Splash);
             //FindViewById<TextView>(Resource.Id.txtDescription).Text = $"Version {PackageManager.GetPackageInfo(PackageName, 0).VersionName}";
         }
