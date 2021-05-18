@@ -5,9 +5,11 @@
     하단바
     <!--<item name="android:navigationBarColor">@color/splash_background</item>-->
     상단바
-    <item name="android:statusBarColor">@android:color/darker_gray</item>
+    <item name="android:statusBarColor">@android:color/white</item>
     <!--<item name="android:background">@color/splash_background</item>-->
+    <item name="android:windowLightStatusBar">true</item>
     <item name="android:windowNoTitle">true</item>
+    <!--<item name="android:windowFullscreen">true</item>-->
   </style>
   <style name="MyTheme.Base" parent="Theme.AppCompat.Light">
   </style>
@@ -18,10 +20,14 @@
   <style name="MyTheme.Splash" parent ="Theme.AppCompat.Light.NoActionBar">
     <item name="android:background">@color/splash_background</item>
     <!--하단 바 색깔-->
-    <item name="android:navigationBarColor">@color/splash_background</item> 
+    <item name="android:navigationBarColor">@color/splash_background</item>
+    상단바
+    <item name="android:statusBarColor">@android:color/white</item>
+    <item name="android:windowLightStatusBar">true</item>
     <item name="android:windowNoTitle">true</item>  
+    
     <item name="android:windowFullscreen">true</item>  
     <!--<item name="android:windowContentOverlay">@null</item>-->  
-    <item name="android:windowActionBar">false</item>
+    <!--<item name="android:windowActionBar">false</item>-->
   </style>
 </resources>

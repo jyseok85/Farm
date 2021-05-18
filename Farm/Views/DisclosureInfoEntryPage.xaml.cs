@@ -32,6 +32,8 @@ namespace Farm.Views
 
         }
 
+        
+
         void LoadDisclosureInfomation(string filename)
         {
             try

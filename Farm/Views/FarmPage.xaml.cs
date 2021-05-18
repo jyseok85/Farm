@@ -1,4 +1,5 @@
 ﻿using Farm.Models;
+using Farm.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -14,16 +15,10 @@ namespace Farm.Views
         //readonly string _fileName = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "notes.txt");
 
 
+        private string SearchText { get; set; } 
         public FarmPage()
         {
             InitializeComponent();
-            //// Read the file.
-            //if (File.Exists(_fileName))
-            //{
-            //    editor.Text = File.ReadAllText(_fileName);
-            //}
-
-
         }
 
         /// <summary>
@@ -34,11 +29,6 @@ namespace Farm.Views
             base.OnAppearing();
 
             await App.GetInitialData(StatusMessage);
-            // Set the data source for the CollectionView to a
-            // sorted collection of notes.
-            //collectionView.ItemsSource = notes
-            //    .OrderBy(d => d.등재일자)
-            //    .ToList();
         }
 
         async void OnAddClicked(object sender, EventArgs e)
@@ -66,69 +56,78 @@ namespace Farm.Views
         {
             //SearchBar searchBar = (SearchBar)sender;
             //searchResults.ItemsSource = DataService.GetSearchResults(searchBar.Text);
-
             //((FarmPage)Shell.Current.CurrentPage).aaa();
             Default = SearchLabel.Bounds;
+            isShowLabel = false;
+#pragma warning disable CS4014 // 이 호출을 대기하지 않으므로 호출이 완료되기 전에 현재 메서드가 계속 실행됩니다.
             CloseLabel();
+#pragma warning restore CS4014 // 이 호출을 대기하지 않으므로 호출이 완료되기 전에 현재 메서드가 계속 실행됩니다.
         }
 
         private async Task CloseLabel()
         {
-            while(SearchLabel.HeightRequest > 0)
+            _ = CustomTitle.TranslateTo(0, -50);
+            _ = Body.TranslateTo(0, -50);
+
+            while (CancelButton.Width.Value < 1 && this.isShowLabel == false)
             {
-                if (SearchLabel.Margin.Top > 0)
-                {
-                    SearchLabel.Margin = new Thickness(20, SearchLabel.Margin.Top - 2, 0, 0);
-                }
-
-                if(SearchLabel.HeightRequest > 0)
-                {
-                    SearchLabel.HeightRequest -= 2;
-                }
+                GridLength grid = new GridLength(CancelButton.Width.Value + 0.2, GridUnitType.Star);
+                CancelButton.Width = grid;
                 await Task.Delay(1);
-                if (CancelButton.Width.Value < 1)
-                {
-                    GridLength grid = new GridLength(CancelButton.Width.Value + 0.1, GridUnitType.Star);
-                    CancelButton.Width = grid;
-                }
-            }
 
+            }
         }
 
         private async Task ShowLabel()
         {
-            while (SearchLabel.HeightRequest < 36)
+            _ = CustomTitle.TranslateTo(0, 0);
+            _ = Body.TranslateTo(0, 0);
+
+            while (this.isShowLabel == true)
             {
-                if (SearchLabel.Margin.Top < 20)
+                double targetValue = CancelButton.Width.Value - 0.2;
+                if (targetValue <= 0)
                 {
-                    SearchLabel.Margin = new Thickness(20, SearchLabel.Margin.Top + 2, 0, 0);
+                    isShowLabel = false;
+                    targetValue = 0;
                 }
 
-                if (SearchLabel.HeightRequest < 36)
-                {
-                    SearchLabel.HeightRequest += 2;
-                }
+                GridLength grid = new GridLength(targetValue, GridUnitType.Star);
+                CancelButton.Width = grid;
                 await Task.Delay(1);
-
-                if (CancelButton.Width.Value > 0 )
-                {
-                    double targetValue = CancelButton.Width.Value - 0.1;
-                    if(targetValue >= 0)
-                    { 
-                        GridLength grid = new GridLength(targetValue, GridUnitType.Star);
-                        CancelButton.Width = grid;
-                    }
-                }
-
             }
         }
 
                                                                         
         Rectangle Default = Rectangle.Zero;
-
-        private void SearchBarNoUnderline_Unfocused(object sender, FocusEventArgs e)
+        bool isShowLabel = false;
+        private void SearchBarNoUnderline_CancelButtonPressed(object sender, EventArgs e)
         {
+             isShowLabel = true;
+            Body.IsVisible = true;
+            SearchBarNoUnderline.Unfocus();
+
+#pragma warning disable CS4014 // 이 호출을 대기하지 않으므로 호출이 완료되기 전에 현재 메서드가 계속 실행됩니다.
             ShowLabel();
+#pragma warning restore CS4014 // 이 호출을 대기하지 않으므로 호출이 완료되기 전에 현재 메서드가 계속 실행됩니다.
+        }
+
+        private void SearchBarNoUnderline_SearchButtonPressed(object sender, EventArgs e)
+        {
+            Body.IsVisible = false;
+
+            SearchItemView.IsVisible = true;
+            //CollectionView 표시
+            //기존꺼 삭제
+            DisclosureInfomationViewModel disclosure = new DisclosureInfomationViewModel();
+            disclosure.SearchAllText(SearchBarNoUnderline.Text);
+            disclosure.InitDataSetting();
+            BindingContext = disclosure;
+        }
+        void OnCollectionViewRemainingItemsThresholdReached(object sender, EventArgs e)
+        {
+            // Retrieve more data here, or via the RemainingItemsThresholdReachedCommand.
+            // This sample retrieves more data using the RemainingItemsThresholdReachedCommand.
         }
     }
 }

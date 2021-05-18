@@ -15,6 +15,7 @@ namespace Farm
         public static string AppDataPath { get; private set; }
 
         public static IList<DisclosureInfomation> DisInfo { get; set; }
+        public static IList<DisclosureInfomation> DisSearchInfo { get; set; }
 
         public App()
         {

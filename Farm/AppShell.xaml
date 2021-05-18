@@ -3,13 +3,12 @@
        xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
        xmlns:views="clr-namespace:Farm.Views"
        BackgroundColor="White"
-       TitleColor ="White"
+       TitleColor ="Black"
        NavigationPage.HasNavigationBar="false"
        x:Class="Farm.AppShell">
 
     <TabBar>
-        <ShellContent Title="유기농업자재 조회"
-                        Icon="icon_feed.png"
+        <ShellContent Title="유기농업자재 조회" Icon="icon_feed.png"
                         ContentTemplate="{DataTemplate views:FarmPage}" />
         <ShellContent Title="행정처분현황 조회"
                         Icon="icon_feed.png"
