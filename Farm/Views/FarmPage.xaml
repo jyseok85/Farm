@@ -117,40 +117,51 @@
             </Frame>
 
         </Grid>
-        
-        <CollectionView x:Name="SearchItemView"
+
+        <Grid x:Name="SearchItemBody">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="100" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+            <Label x:Name="SearchResultMessage" 
+                   Grid.Row="0"
+                   Text="This app is written in XAML and C# with the Xamarin Platform." />
+
+            <CollectionView x:Name="SearchItemView"
                         ItemsSource="{Binding CollectionViewItems}"
-                        IsVisible="true"
                         RemainingItemsThreshold="5"
                         RemainingItemsThresholdReached="OnCollectionViewRemainingItemsThresholdReached" 
-                        RemainingItemsThresholdReachedCommand="{Binding LoadMoreDataCommand}">
-            <CollectionView.ItemTemplate>
-                <DataTemplate>
-                    <Grid Padding="10" BackgroundColor="Red">
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="Auto" />
-                            <RowDefinition Height="1" />
-                            <RowDefinition Height="Auto" />
-                        </Grid.RowDefinitions>
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="Auto" />
-                            <ColumnDefinition Width="Auto" />
-                        </Grid.ColumnDefinitions>
-                        <Label Grid.Column="1"
+                        RemainingItemsThresholdReachedCommand="{Binding LoadMoreDataCommand}"
+                        Grid.Row="1">
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <Grid Padding="10" BackgroundColor="Red">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="1" />
+                                <RowDefinition Height="Auto" />
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition Width="Auto" />
+                            </Grid.ColumnDefinitions>
+                            <Label Grid.Column="1"
                                Text="{Binding 상표명}"
                                FontAttributes="Bold"
                                BackgroundColor="White"/>
-                        <Label Grid.Row="1"
+                            <Label Grid.Row="1"
                                Grid.Column="1"
                                Text="{Binding 공시번호}"
                                FontAttributes="Italic"
                                VerticalOptions="End" 
                                BackgroundColor="White"
                                />
-                    </Grid>
-                </DataTemplate>
-            </CollectionView.ItemTemplate>
-        </CollectionView>
+                        </Grid>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+            
+        </Grid>
         <Label x:Name="StatusMessage" IsVisible="false" Text="This app is written in XAML and C# with the Xamarin Platform." />
     </StackLayout>
 </ContentPage>

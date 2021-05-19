@@ -19,6 +19,7 @@ namespace Farm.Views
         public FarmPage()
         {
             InitializeComponent();
+            SearchItemBody.TranslationY= -50;
         }
 
         /// <summary>
@@ -116,11 +117,12 @@ namespace Farm.Views
         {
             Body.IsVisible = false;
 
-            SearchItemView.IsVisible = true;
+            SearchItemBody.IsVisible = true;
             //CollectionView 표시
             //기존꺼 삭제
             DisclosureInfomationViewModel disclosure = new DisclosureInfomationViewModel();
-            disclosure.SearchAllText(SearchBarNoUnderline.Text);
+            int searchCount = disclosure.SearchAllText(SearchBarNoUnderline.Text).Count;
+            SearchResultMessage.Text = string.Format("(총 조회건수 : {0} 건)", searchCount);
             disclosure.InitDataSetting();
             BindingContext = disclosure;
         }
