@@ -6,6 +6,11 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="Resources\FarmSubtitle1.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\FarmSubtitle1.png" />
     <EmbeddedResource Include="Resources\logo.jpg" />
     <EmbeddedResource Include="Resources\background.jpg" />
 

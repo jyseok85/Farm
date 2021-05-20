@@ -2,9 +2,11 @@
 using Farm.ViewModels;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
+using Xamarin.Essentials;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -19,38 +21,84 @@ namespace Farm.Views
         public FarmPage()
         {
             InitializeComponent();
-            SearchItemBody.TranslationY= -50;
+            SearchItemBody.TranslationY= -SearchTitleLabel.Height;
+            HistoryCollectionView.ItemsSource = ldsclosurehistory;
+            GetHistory();
         }
 
         /// <summary>
-        /// 페이지가 표시되면 
+        /// 페이지가 표시되면   
         /// </summary>
         protected async override void OnAppearing()
         {
             base.OnAppearing();
 
             await App.GetInitialData(StatusMessage);
-        }
 
-        async void OnAddClicked(object sender, EventArgs e)
-        {
-            // Navigate to the NoteEntryPage, without passing any data.
-            await Shell.Current.GoToAsync(nameof(DisclosureInfoEntryPage));
+           
         }
-
-        async void OnSelectionChanged(object sender, SelectionChangedEventArgs e)
+        //ObservableCollection 을 사용해야 View에서 가져갈수 있다. 
+        ObservableCollection<DisclosureHistory> ldsclosurehistory = new ObservableCollection<DisclosureHistory>();
+        private void GetHistory()
         {
-            if (e.CurrentSelection != null)
+            string majorKey = "유기농업자재";
+
+            string history = Preferences.Get(majorKey + "History", "");
+            List<string> lHistory = history.Split('_').ToList();
+            string labelText = string.Empty;
+            foreach (string str in lHistory)
             {
-                // Navigate to the NoteEntryPage, passing the filename as a query parameter.
-                DisclosureInfomation note = (DisclosureInfomation)e.CurrentSelection.FirstOrDefault();
-                await Shell.Current.GoToAsync($"{nameof(DisclosureInfoEntryPage)}?{nameof(DisclosureInfoEntryPage.ItemId)}={note.공시ID}");
+                DisclosureHistory dh = new DisclosureHistory();
+                dh.상표명 = str;
+                ldsclosurehistory.Add(dh);
             }
         }
+        public void UpdateHistory(string value)
+        {
+            DisclosureHistory dh = new DisclosureHistory();
+            dh.상표명 = value;
+            ldsclosurehistory.Insert(0, dh);
 
+            if(ldsclosurehistory.Count > 10)
+            {
+                ldsclosurehistory.RemoveAt(10);
+            }
+            SaveHistory();
+            
+        }
+        public void SaveHistory()
+        {
+            string majorKey = "유기농업자재";
+
+            string saveStr = string.Empty;
+
+            foreach(DisclosureHistory history in ldsclosurehistory)
+            {
+                saveStr += history.상표명 + "_" + saveStr;
+            }
+
+            Preferences.Set(majorKey + "상표명", saveStr);
+        }
+        //async void OnSelectionChanged(object sender, SelectionChangedEventArgs e)
+        //{
+        //    if (e.CurrentSelection != null)
+        //    {
+        //        // Navigate to the NoteEntryPage, passing the filename as a query parameter.
+        //        DisclosureInfomation note = (DisclosureInfomation)e.CurrentSelection.FirstOrDefault();
+        //        await Shell.Current.GoToAsync($"{nameof(DisclosureInfoEntryPage)}?{nameof(DisclosureInfoEntryPage.ItemId)}={note.공시ID}");
+        //    }
+        //}
+        async void OnSelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            string current = (e.CurrentSelection.FirstOrDefault() as DisclosureInfomation)?.상표명;
+
+            UpdateHistory(current);
+
+            //페이지 이동
+        }
         public void aaa()
         {
-            SearchLabel.IsVisible = false;
+            SearchTitleLabel.IsVisible = false;
         }
 
         void SearchBarNoUnderline_Focused(object sender, EventArgs e)
@@ -58,7 +106,6 @@ namespace Farm.Views
             //SearchBar searchBar = (SearchBar)sender;
             //searchResults.ItemsSource = DataService.GetSearchResults(searchBar.Text);
             //((FarmPage)Shell.Current.CurrentPage).aaa();
-            Default = SearchLabel.Bounds;
             isShowLabel = false;
 #pragma warning disable CS4014 // 이 호출을 대기하지 않으므로 호출이 완료되기 전에 현재 메서드가 계속 실행됩니다.
             CloseLabel();
@@ -67,13 +114,21 @@ namespace Farm.Views
 
         private async Task CloseLabel()
         {
-            _ = CustomTitle.TranslateTo(0, -50);
-            _ = Body.TranslateTo(0, -50);
+            //double yValue = ((double)CustomTitle.Height) - SearchControl.Height;
+            double yValue = SearchTitleLabel.Height;
+            _ = CustomTitle.TranslateTo(0, -yValue);
+            _ = Body.TranslateTo(0, -yValue);
 
-            while (CancelButton.Width.Value < 1 && this.isShowLabel == false)
+           // CancelButton.Text = "취";
+            while (GridCancelButtonArea.Width.Value < 1 && this.isShowLabel == false)
             {
-                GridLength grid = new GridLength(CancelButton.Width.Value + 0.2, GridUnitType.Star);
-                CancelButton.Width = grid;
+                GridLength grid = new GridLength(GridCancelButtonArea.Width.Value + 0.2, GridUnitType.Star);
+                
+                GridCancelButtonArea.Width = grid;
+                //if (GridCancelButtonArea.Width.Value >= 0.6)
+                //{
+                //    CancelButton.Text = "취소";
+                //}
                 await Task.Delay(1);
 
             }
@@ -86,7 +141,7 @@ namespace Farm.Views
 
             while (this.isShowLabel == true)
             {
-                double targetValue = CancelButton.Width.Value - 0.2;
+                double targetValue = GridCancelButtonArea.Width.Value - 0.2;
                 if (targetValue <= 0)
                 {
                     isShowLabel = false;
@@ -94,18 +149,17 @@ namespace Farm.Views
                 }
 
                 GridLength grid = new GridLength(targetValue, GridUnitType.Star);
-                CancelButton.Width = grid;
+                GridCancelButtonArea.Width = grid;
                 await Task.Delay(1);
             }
         }
 
-                                                                        
-        Rectangle Default = Rectangle.Zero;
         bool isShowLabel = false;
         private void SearchBarNoUnderline_CancelButtonPressed(object sender, EventArgs e)
         {
-             isShowLabel = true;
-            Body.IsVisible = true;
+            isShowLabel = true;
+            DefaultBody.IsVisible = true;
+            SearchItemBody.IsVisible = false;
             SearchBarNoUnderline.Unfocus();
 
 #pragma warning disable CS4014 // 이 호출을 대기하지 않으므로 호출이 완료되기 전에 현재 메서드가 계속 실행됩니다.
@@ -115,9 +169,9 @@ namespace Farm.Views
 
         private void SearchBarNoUnderline_SearchButtonPressed(object sender, EventArgs e)
         {
-            Body.IsVisible = false;
-
+            DefaultBody.IsVisible = false;
             SearchItemBody.IsVisible = true;
+
             //CollectionView 표시
             //기존꺼 삭제
             DisclosureInfomationViewModel disclosure = new DisclosureInfomationViewModel();

@@ -41,7 +41,12 @@ namespace Farm.Models
         public string 사업장주소 { get; set; }
         [JsonProperty("MANAGE_INSTT_NM")]
         public string 관리기관명 { get; set; }
+
+        public string 컨트롤배경색상 { get; set; } = "white";
+
+        public string 공시기간 { get; set; }
     }
+
 
     public class SearchProperty
     {
@@ -87,5 +92,10 @@ namespace Farm.Models
         작물시험
     }
 
-    
+    public class DisclosureHistory
+    { 
+        public string 상표명 { get; set; } = string.Empty;
+
+    }
+
 }

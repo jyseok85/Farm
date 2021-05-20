@@ -6,12 +6,23 @@
        TitleColor ="Black"
        NavigationPage.HasNavigationBar="false"
        x:Class="Farm.AppShell">
-
+    <Shell.Resources>
+        <Style TargetType="TabBar">
+            <Setter Property="Shell.TabBarBackgroundColor"
+                Value="CornflowerBlue" />
+            <Setter Property="Shell.TabBarTitleColor"
+                Value="Black" />
+            <Setter Property="Shell.TabBarUnselectedColor"
+                Value="AntiqueWhite" />
+        </Style>
+    </Shell.Resources>
     <TabBar>
+        
         <ShellContent Title="유기농업자재 조회" Icon="icon_feed.png"
                         ContentTemplate="{DataTemplate views:FarmPage}" />
         <ShellContent Title="행정처분현황 조회"
                         Icon="icon_feed.png"
+                      IsVisible="False"
                         ContentTemplate="{DataTemplate views:FarmPage2}" />
         <ShellContent Title="About"
                     Icon="icon_about.png"

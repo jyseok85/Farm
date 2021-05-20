@@ -11,157 +11,292 @@
     </Shell.SearchHandler>-->
 
 
-    <StackLayout>
-        <!--타이틀 라벨-->
-        
-
-        <!--바디-->
+<Grid x:Name="Contents" RowSpacing="0" BackgroundColor="Transparent">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
         <Grid x:Name="CustomTitle"
-              BackgroundColor="NavajoWhite"
+              BackgroundColor="Transparent"
+              VerticalOptions="StartAndExpand"
+              Grid.Row="0" 
+              HeightRequest="100"
             >
             <Grid.RowDefinitions>
-                <RowDefinition Height="Auto" />
-                <RowDefinition Height="50" />
+                <RowDefinition x:Name="CustomTitleGridRow0" Height="6*" />
+                <RowDefinition Height="4*" />
+                <RowDefinition Height="1" />
             </Grid.RowDefinitions>
-            <Label x:Name="SearchLabel"
+            <Label x:Name="SearchTitleLabel"
                FontSize ="Title"
                TextColor="Black"
                FontAttributes="Bold"
-               BackgroundColor="White"
-               Margin="20,20,20,0"
+               BackgroundColor="Transparent"
+               Padding="20,20,20,0"
                Text="검색" />
-            
+
             <!--검색상자-->
             <Grid x:Name="SearchControl"
                 Grid.Row="1"
                 Margin="20,0,20,0"
                 ColumnSpacing="0"
+                BackgroundColor="Transparent"
                 >
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="46" />
-                </Grid.RowDefinitions>
-            
+
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="6*" /> 
+                    <ColumnDefinition Width="6*" />
                     <ColumnDefinition
-                        x:Name="CancelButton"
+                        x:Name="GridCancelButtonArea"
                         Width="0" />
                 </Grid.ColumnDefinitions>
-            
+
                 <Frame 
                     Grid.Column="0"
                     CornerRadius = "10"
                     BackgroundColor = "#D2D2D2"
                     OutlineColor = "#D2D2D2"
-                    Padding="1"
+                    Padding="0"
                     >
                     <controls:SearchBarNoUnderline x:Name="SearchBarNoUnderline"
                                        Focused="SearchBarNoUnderline_Focused"
                                        SearchButtonPressed="SearchBarNoUnderline_SearchButtonPressed"
                                        Placeholder="공시번호, 자재, 상표, 제조업체 등"
-                                       FontSize="Large"
+                                       FontSize="Subtitle"
                                        BackgroundColor="Transparent"/>
                 </Frame>
-                <Button 
-                        Grid.Column="1"
-                        BackgroundColor="Red"
+                <controls:NoWarpButton x:Name="CancelButton" 
+                                       Grid.Column="1"
+                        BackgroundColor="Transparent"
                         Released="SearchBarNoUnderline_CancelButtonPressed"
                         Text="취소"
                         VerticalOptions="Center"
-                        HorizontalOptions="Center"
-                        FontSize="Large"
+                        HorizontalOptions="Start"
+                        FontSize="Subtitle"
                         Padding="0"
-                        >
-                    </Button>
-
+                    />
             </Grid>
+            
+            <!--라인-->
+            <BoxView Grid.Row="2" BackgroundColor="Gray" HeightRequest="1" />
         </Grid>
-        
-        <Grid x:Name="Body"
-            BackgroundColor="Aqua"
+        <StackLayout x:Name="Body" 
+                     Grid.Row="1"  
+                     VerticalOptions="EndAndExpand"
+                     >
+      
+            <Grid x:Name="DefaultBody"
+            BackgroundColor="Transparent"
+            IsVisible="true"
             >
-            <Grid.RowDefinitions>
-                <RowDefinition Height="100" />
-                <RowDefinition Height="*" />
-            </Grid.RowDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="*" />
+                </Grid.RowDefinitions>
 
-
-            <!--최근조회아이템-->
-            <Frame  CornerRadius = "10"
+                <Label Grid.Row="0"
+                       Text="최근 조회 항목" 
+                       FontAttributes="Bold"
+                       FontSize="Medium"
+                       Margin="20,10,20,0"
+                       TextColor="Black"
+                           />
+                <!--최근조회아이템-->
+                <Frame  CornerRadius = "10"
                 HeightRequest = "160"
-                WidthRequest = "60"
                 BackgroundColor = "CornflowerBlue"
                 OutlineColor = "CornflowerBlue"
                 HorizontalOptions = "FillAndExpand"
                 VerticalOptions = "Center"
-                Margin = "20,10,20,10"
-                Padding="5"
-                Grid.Row="0"
-                >
-                <Label Text="최근 조회 정보" />
-            </Frame>
-
-            <!--조회이력-->
-            <Frame  CornerRadius = "10"
-                HeightRequest = "500"
-                WidthRequest = "60"
-                BackgroundColor = "CornflowerBlue"
-                OutlineColor = "CornflowerBlue"
-                HorizontalOptions = "FillAndExpand"
-                VerticalOptions = "Center"
-                Margin = "20,10,20,10"
+                Margin = "20,0,20,10"
                 Padding="5"
                 Grid.Row="1"
                 >
-                <Label Text="조회 이력..." />
-            </Frame>
+                    
+                </Frame>
+                <Label Grid.Row="2"
+                       Text="조회 이력..." 
+                       FontAttributes="Bold"
+                       TextColor="Black"
+                       FontSize="Medium"
+                       Margin="20,0,10,0"/>
+                <Frame  CornerRadius = "10"
+                HeightRequest = "500"
+                BackgroundColor = "CornflowerBlue"
+                OutlineColor = "CornflowerBlue"
+                HorizontalOptions = "FillAndExpand"
+                VerticalOptions = "EndAndExpand"
+                Margin = "20,0,20,10"
+                Padding="5"
+                Grid.Row="3"
+                >
+                    <CollectionView 
+                        x:Name="HistoryCollectionView"
+                        
+                        BackgroundColor="Transparent"
+                        SelectionMode="Single"
+                    >
+                        <CollectionView.ItemTemplate>
+                            <DataTemplate>
+                                <!--셀간격을 위한 프레임-->
+                                <Frame  BackgroundColor="Transparent" Padding="0">
+                                    <!--테두리를 위한 프레임-->
+                                    <Frame  BackgroundColor="Transparent" Padding="0" Margin="20,0,20,0">
+                                        <Grid Padding="0" RowSpacing="0">
+                                            <Grid.RowDefinitions>
+                                                <RowDefinition Height="Auto" />
+                                                <RowDefinition Height="Auto" />
+                                            </Grid.RowDefinitions>
+                                          
+                                            <Label 
+                                           Text="{Binding 상표명}"
+                                           FontSize="Default"
+                                           Margin="0"
+                                           BackgroundColor="Transparent"
+                                           TextColor="Black" 
+                                              />
+                                            <BoxView Grid.Row="2" BackgroundColor="Gray" HeightRequest="1" />
 
-        </Grid>
+                                        </Grid>
+                                    </Frame>
+                                </Frame>
+                            </DataTemplate>
+                        </CollectionView.ItemTemplate>
+                    </CollectionView>
+                </Frame>
 
-        <Grid x:Name="SearchItemBody">
-            <Grid.RowDefinitions>
-                <RowDefinition Height="100" />
-                <RowDefinition Height="*" />
-            </Grid.RowDefinitions>
-            <Label x:Name="SearchResultMessage" 
-                   Grid.Row="0"
-                   Text="This app is written in XAML and C# with the Xamarin Platform." />
+            </Grid>
 
-            <CollectionView x:Name="SearchItemView"
+            <Grid x:Name="SearchItemBody"
+              IsVisible="false"
+              BackgroundColor="Transparent"
+                  
+              >
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="*" />
+                </Grid.RowDefinitions>
+                <!--서브타이틀-->
+                <Grid Grid.Row="0" Padding="20,10,20,0" HeightRequest="30">
+                    <Grid RowSpacing="0" ColumnSpacing="0" >
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="3" />
+                            <RowDefinition Height="*" />
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="1*" />
+                            <ColumnDefinition Width="1*" />
+                            <ColumnDefinition Width="1*" />
+                            <ColumnDefinition Width="15*" />
+                            <ColumnDefinition Width="10*" />
+                        </Grid.ColumnDefinitions>
+                        <!--Source="{local:ImageResource Farm.Resources.FarmSubtitle1.png}"-->
+                        <!--<Image Source="{local:ImageResource Farm.Resources.FarmSubtitle1.png}"
+                    Aspect ="AspectFit"
+                    Margin="20,0,0,0"
+                    BackgroundColor="Blue"
+                    HorizontalOptions="StartAndExpand"/>-->
+                        <Frame Grid.Row="0"
+                           Grid.Column="0"
+                           BackgroundColor="Red"
+                           >
+                        </Frame>
+                        <Frame Grid.Row="0"
+                           Grid.Column="1"
+                           BackgroundColor="Orange"
+                           >
+                        </Frame>
+                        <Frame Grid.Row="0"
+                           Grid.Column="2"
+                           BackgroundColor="Green"
+                           >
+                        </Frame>
+                        <Label 
+                       Grid.Column="0"
+                       Grid.Row="1"
+                       Grid.ColumnSpan="4"
+                       HorizontalTextAlignment="Start"
+                       VerticalTextAlignment="End"
+                       FontSize="Subtitle"
+                       FontAttributes="Bold"
+                       TextColor="Black"
+                       Text="유기농업자재 공시현황" />
+                        <Label x:Name="SearchResultMessage" 
+                       Grid.Column="4"
+                       Grid.Row="1"
+                       HorizontalTextAlignment="End"
+                       VerticalTextAlignment="End"
+                       FontSize="Caption"
+                       Text="(총 조회건수 : 0 건)" />
+                    </Grid>
+
+                </Grid>
+                <CollectionView 
                         ItemsSource="{Binding CollectionViewItems}"
                         RemainingItemsThreshold="5"
                         RemainingItemsThresholdReached="OnCollectionViewRemainingItemsThresholdReached" 
                         RemainingItemsThresholdReachedCommand="{Binding LoadMoreDataCommand}"
-                        Grid.Row="1">
-                <CollectionView.ItemTemplate>
-                    <DataTemplate>
-                        <Grid Padding="10" BackgroundColor="Red">
-                            <Grid.RowDefinitions>
-                                <RowDefinition Height="Auto" />
-                                <RowDefinition Height="1" />
-                                <RowDefinition Height="Auto" />
-                            </Grid.RowDefinitions>
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="Auto" />
-                                <ColumnDefinition Width="Auto" />
-                            </Grid.ColumnDefinitions>
-                            <Label Grid.Column="1"
-                               Text="{Binding 상표명}"
-                               FontAttributes="Bold"
-                               BackgroundColor="White"/>
-                            <Label Grid.Row="1"
-                               Grid.Column="1"
-                               Text="{Binding 공시번호}"
-                               FontAttributes="Italic"
-                               VerticalOptions="End" 
-                               BackgroundColor="White"
-                               />
-                        </Grid>
-                    </DataTemplate>
-                </CollectionView.ItemTemplate>
-            </CollectionView>
-            
-        </Grid>
+                        Grid.Row="1"
+                        BackgroundColor="Transparent"
+                        SelectionMode="Single"
+                        SelectionChanged="OnSelectionChanged"
+                >
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate>
+                            <!--셀간격을 위한 프레임-->
+                            <Frame  BackgroundColor="Transparent" Padding="0">
+                                <!--테두리를 위한 프레임-->
+                                <Frame  BackgroundColor="Red" CornerRadius = "10" Padding="0" Margin="20,5,20,5">
+                                    <Grid BackgroundColor="{Binding 컨트롤배경색상}"
+                                      RowSpacing="0">
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition Height="Auto" />
+                                            <RowDefinition Height="Auto" />
+                                            <RowDefinition Height="Auto" />
+                                            <RowDefinition Height="Auto" />
+                                        </Grid.RowDefinitions>
+
+                                        <Label Grid.Row="0"
+                                           Text="{Binding 상표명}"
+                                           FontAttributes="Bold"
+                                           FontSize="Medium"
+                                           Margin="10,2,10,2"
+                                           BackgroundColor="Transparent"
+                                           TextColor="Black" 
+                                              />
+
+                                        <Label Grid.Row="1"
+                                           Text="{Binding 제조업체명}"
+                                           Margin="10,0,10,0"
+                                           FontSize="Small"
+                                           BackgroundColor="Transparent"/>
+
+                                        <Label Grid.Row="2"
+                                           Text="{Binding 공시번호}"
+                                           Margin="10,0,10,0"
+                                           FontSize="Small"
+                                           BackgroundColor="Transparent"/>
+
+                                        <Label 
+                                           Grid.Row="3"
+                                           Text="{Binding 공시기간}"
+                                           Margin="10,0,10,2"
+                                           FontSize="Small"
+                                           BackgroundColor="Transparent"
+                                           />
+
+                                    </Grid>
+                                </Frame>
+                            </Frame>
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
+
+            </Grid>
+            <!--라인-->
+            <!--<BoxView Grid.Row="2" BackgroundColor="Gray" HeightRequest="1" VerticalOptions="End" />-->
         <Label x:Name="StatusMessage" IsVisible="false" Text="This app is written in XAML and C# with the Xamarin Platform." />
     </StackLayout>
+</Grid>
 </ContentPage>

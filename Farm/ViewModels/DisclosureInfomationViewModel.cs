@@ -10,6 +10,8 @@ using System.Threading.Tasks;
 using System.Windows.Input;
 using Xamarin.Forms;
 using System.Linq;
+using Xamarin.Essentials;
+
 namespace Farm.ViewModels
 {
     public class DisclosureInfomationViewModel : INotifyPropertyChanged
@@ -70,13 +72,54 @@ namespace Farm.ViewModels
                 {
                     if (SearchResult.Count > i)
                     {
+                        공시종료일에따른_컨트롤배경_색상계산(SearchResult[i]);
+
+                        공시기간만들기(SearchResult[i]);
+
                         CollectionViewItems.Add(SearchResult[i]);
+
                         itemCount++;
                     }
                 }
             }
         }
 
+        private void 공시종료일에따른_컨트롤배경_색상계산(DisclosureInfomation info)
+        {
+            string enddate = info.공시종료;
+            enddate = enddate.Insert(6, " ");
+            enddate = enddate.Insert(4, " ");
+            DateTime endDateTime = Convert.ToDateTime(enddate);
+            int result = DateTime.Compare(DateTime.Now, endDateTime);
+            if (result > 0)
+            {
+                info.컨트롤배경색상 = "#f88686";
+            }
+            else
+            {
+                int furtureResult = DateTime.Compare( DateTime.Now.AddMonths(1), endDateTime);
+                if (result > 0)
+                {
+                    info.컨트롤배경색상 = "#f1b855";
+                }
+                else
+                    info.컨트롤배경색상 = "#8dd041";
+            }
+        }
+
+        private void 공시기간만들기(DisclosureInfomation info)
+        {
+
+            string startDate = info.공시시작;
+            startDate = startDate.Insert(6, ".");
+            startDate = startDate.Insert(4, ".");
+
+            string enddate = info.공시종료;
+            enddate = enddate.Insert(6, ".");
+            enddate = enddate.Insert(4, ".");
+
+            info.공시기간 = startDate + " ~ " + enddate;
+        }
         /// <summary>
         /// 굳이 사용할 필요가...
         /// </summary>
@@ -165,6 +208,20 @@ namespace Farm.ViewModels
 
             return matches;
         }
+
+
+        private void SaveSelectedItem(DisclosureInfomation info)
+        {
+            string majorKey = "유기농업자재";
+            Preferences.Set(majorKey + "상표명", info.상표명);
+            Preferences.Set(majorKey + "제조업체명", info.제조업체명);
+            Preferences.Set(majorKey + "공시번호", info.공시번호);
+            Preferences.Set(majorKey + "공시기간", info.공시기간);
+
+
+
+        }
+
         #region INotifyPropertyChanged
 
         public event PropertyChangedEventHandler PropertyChanged;
