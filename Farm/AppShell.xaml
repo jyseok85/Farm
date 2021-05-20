@@ -9,7 +9,7 @@
     <Shell.Resources>
         <Style TargetType="TabBar">
             <Setter Property="Shell.TabBarBackgroundColor"
-                Value="CornflowerBlue" />
+                Value="White" />
             <Setter Property="Shell.TabBarTitleColor"
                 Value="Black" />
             <Setter Property="Shell.TabBarUnselectedColor"

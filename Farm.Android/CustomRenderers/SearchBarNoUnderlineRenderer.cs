@@ -20,8 +20,6 @@ namespace Farm.Droid.CustomRenderers
                 plate.SetBackgroundColor(Android.Graphics.Color.Transparent);
             }
         }
-
-        
     }
 #pragma warning restore CS0618 // 형식 또는 멤버는 사용되지 않습니다.
 }

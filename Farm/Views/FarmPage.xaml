@@ -5,6 +5,24 @@
              xmlns:controls="clr-namespace:Farm.Controls"
              xmlns:local ="clr-namespace:Farm"
              >
+    <ContentPage.Resources>
+        <Style TargetType="Grid">
+            <Setter Property="VisualStateManager.VisualStateGroups">
+                <VisualStateGroupList>
+                    <VisualStateGroup x:Name="CommonStates">
+                        <VisualState x:Name="Normal" />
+                        <VisualState x:Name="Selected">
+                            <VisualState.Setters>
+                                <Setter Property="BackgroundColor"
+                                        Value="LightSkyBlue" />
+                            </VisualState.Setters>
+                        </VisualState>
+                    </VisualStateGroup>
+                </VisualStateGroupList>
+            </Setter>
+        </Style>
+    </ContentPage.Resources>
+    
     <!--<Shell.SearchHandler>
         <controls:OrganicMaterialsSearchHandler Placeholder="검색"                                                
                                             DisplayMemberName="Name" />
@@ -85,7 +103,7 @@
                      >
       
             <Grid x:Name="DefaultBody"
-            BackgroundColor="Transparent"
+            BackgroundColor="#8ACC3E"
             IsVisible="true"
             >
                 <Grid.RowDefinitions>
@@ -104,9 +122,9 @@
                            />
                 <!--최근조회아이템-->
                 <Frame  CornerRadius = "10"
-                HeightRequest = "160"
-                BackgroundColor = "CornflowerBlue"
-                OutlineColor = "CornflowerBlue"
+                HeightRequest = "120"
+                BackgroundColor = "White"
+                OutlineColor = "#77C243"
                 HorizontalOptions = "FillAndExpand"
                 VerticalOptions = "Center"
                 Margin = "20,0,20,10"
@@ -123,8 +141,8 @@
                        Margin="20,0,10,0"/>
                 <Frame  CornerRadius = "10"
                 HeightRequest = "500"
-                BackgroundColor = "CornflowerBlue"
-                OutlineColor = "CornflowerBlue"
+                BackgroundColor = "White"
+                OutlineColor = "#77C243"
                 HorizontalOptions = "FillAndExpand"
                 VerticalOptions = "EndAndExpand"
                 Margin = "20,0,20,10"
@@ -133,16 +151,15 @@
                 >
                     <CollectionView 
                         x:Name="HistoryCollectionView"
-                        
-                        BackgroundColor="Transparent"
-                        SelectionMode="Single"
+                        SelectionMode="None"
+                        Margin="20,0,20,0"
                     >
                         <CollectionView.ItemTemplate>
                             <DataTemplate>
                                 <!--셀간격을 위한 프레임-->
                                 <Frame  BackgroundColor="Transparent" Padding="0">
                                     <!--테두리를 위한 프레임-->
-                                    <Frame  BackgroundColor="Transparent" Padding="0" Margin="20,0,20,0">
+                                    <Frame  BackgroundColor="White" Padding="1">
                                         <Grid Padding="0" RowSpacing="0">
                                             <Grid.RowDefinitions>
                                                 <RowDefinition Height="Auto" />
@@ -154,9 +171,9 @@
                                            FontSize="Default"
                                            Margin="0"
                                            BackgroundColor="Transparent"
-                                           TextColor="Black" 
+                                           TextColor="DarkGray" 
                                               />
-                                            <BoxView Grid.Row="2" BackgroundColor="Gray" HeightRequest="1" />
+                                            <BoxView Grid.Row="2" BackgroundColor="LightGray" HeightRequest="1" />
 
                                         </Grid>
                                     </Frame>
