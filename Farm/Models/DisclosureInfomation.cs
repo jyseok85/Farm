@@ -42,7 +42,8 @@ namespace Farm.Models
         [JsonProperty("MANAGE_INSTT_NM")]
         public string 관리기관명 { get; set; }
 
-        public string 컨트롤배경색상 { get; set; } = "white";
+        public string 공시만료일_색상 { get; set; } = "Transparent";
+        public string 공시만료일_텍스트 { get; set; } = "";
 
         public string 공시기간 { get; set; }
     }

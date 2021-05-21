@@ -93,17 +93,23 @@ namespace Farm.ViewModels
             int result = DateTime.Compare(DateTime.Now, endDateTime);
             if (result > 0)
             {
-                info.컨트롤배경색상 = "#f88686";
+                info.공시만료일_색상 = "#ff2626";
+                info.공시만료일_텍스트 = "만료됨";
             }
             else
             {
                 int furtureResult = DateTime.Compare( DateTime.Now.AddMonths(1), endDateTime);
                 if (result > 0)
                 {
-                    info.컨트롤배경색상 = "#f1b855";
+                    info.공시만료일_색상 = "#ffb226";
+                    info.공시만료일_텍스트 = "만료예정";
                 }
                 else
-                    info.컨트롤배경색상 = "#8dd041";
+                {
+                    info.공시만료일_색상 = "#62b765";
+                    info.공시만료일_텍스트 = "공시중";
+
+                }
             }
         }
 

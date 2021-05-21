@@ -13,7 +13,7 @@
             <Setter Property="Shell.TabBarTitleColor"
                 Value="Black" />
             <Setter Property="Shell.TabBarUnselectedColor"
-                Value="AntiqueWhite" />
+                Value="Gray" />
         </Style>
     </Shell.Resources>
     <TabBar>
