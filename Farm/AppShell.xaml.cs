@@ -25,9 +25,9 @@ namespace Farm
         void RegisterRoutes()
         {
             //페이지 등록을 하면, GoToAsync 메서드를 통해 (URI 기반 탐색을 사용하여 ) 이 페이지로 이동할 수 있다.
-            Routes.Add("DisclosureInfoEntryPage", typeof(DisclosureInfoEntryPage));
-            Routes.Add("FarmPage", typeof(FarmPage));
-            Routes.Add("AboutPage", typeof(AboutPage));
+            //Routes.Add("DisclosureInfoEntryPage", typeof(DisclosureInfoEntryPage));
+            //Routes.Add("FarmPage", typeof(FarmPage));
+            Routes.Add("FarmDetailPage", typeof(FarmDetailPage));
 
             foreach (var item in Routes)
             {

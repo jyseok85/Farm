@@ -26,6 +26,6 @@
                         ContentTemplate="{DataTemplate views:FarmPage2}" />
         <ShellContent Title="About"
                     Icon="icon_about.png"
-                    ContentTemplate="{DataTemplate views:AboutPage}" />
+                    ContentTemplate="{DataTemplate views:FarmDetailPage}" />
     </TabBar>
 </Shell>

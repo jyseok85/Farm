@@ -1,0 +1,165 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:local ="clr-namespace:Farm"
+             x:Class="Farm.Views.FarmDetailPage">
+    
+    <ContentPage.Background>
+        <!-- StartPoint defaults to (0,0) -->
+        <LinearGradientBrush EndPoint="0,1">
+            <GradientStop Color="#40c1c6"
+                          Offset="0.1" />
+            <GradientStop Color="#47b74b"
+                          Offset="1.0" />
+        </LinearGradientBrush>
+    </ContentPage.Background>
+
+    
+    
+    <!--타이틀은 고정-->
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+        
+        <Frame x:Name="Header"
+               Grid.Row="0" 
+               Margin="0"
+               Padding="0"
+               >
+            <ImageButton
+                    Pressed="BackButtonPressed"
+                    HorizontalOptions="Start"
+                    Margin="5,5,0,0"
+                    HeightRequest="30"
+                    Aspect="AspectFit"
+                    BackgroundColor="Transparent"
+                    Source="{local:ImageResource Farm.Resources.back.png}"
+                    />
+        </Frame>
+        
+        <!--타이틀-->
+        <Grid Grid.Row="1">
+            <Grid Grid.Row="0" Padding="20,0,20,0" HeightRequest="30">
+                <Grid RowSpacing="0" ColumnSpacing="0" >
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="3" />
+                        <RowDefinition Height="*" />
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="1*" />
+                        <ColumnDefinition Width="1*" />
+                        <ColumnDefinition Width="1*" />
+                        <ColumnDefinition Width="15*" />
+                        <ColumnDefinition Width="10*" />
+                    </Grid.ColumnDefinitions>
+                    <Frame Grid.Row="0"
+                           Grid.Column="0"
+                           BackgroundColor="Red"
+                           >
+                    </Frame>
+                    <Frame Grid.Row="0"
+                           Grid.Column="1"
+                           BackgroundColor="Orange"
+                           >
+                    </Frame>
+                    <Frame Grid.Row="0"
+                           Grid.Column="2"
+                           BackgroundColor="Green"
+                           >
+                    </Frame>
+                    <Label 
+                       Grid.Column="0"
+                       Grid.Row="1"
+                       Grid.ColumnSpan="4"
+                       HorizontalTextAlignment="Start"
+                       VerticalTextAlignment="End"
+                       FontSize="Subtitle"
+                       FontAttributes="Bold"
+                       TextColor="Black"
+                       Text="유기농업자재 공시현황" />
+                </Grid>
+
+            </Grid>
+        </Grid>
+
+        <!--컨텐츠-->
+        <ScrollView Grid.Row="2" Margin="0,0,0,0" >
+            <Frame Margin="20,0,20,0" CornerRadius="12" BackgroundColor="White">
+                <Grid x:Name="ContentsGrid" BackgroundColor="Gray"  RowSpacing="1" ColumnSpacing="1"  Padding="0" Margin="0">
+                    
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*" />
+                        <RowDefinition Height="*" />
+                        <RowDefinition Height="*" />
+                        <RowDefinition Height="*" />
+                        <RowDefinition Height="*" />
+                        <RowDefinition Height="*" />
+                        <RowDefinition Height="*" />
+                        <RowDefinition Height="*" />
+                        <RowDefinition Height="*" />
+                        <RowDefinition Height="*" />
+                        <RowDefinition Height="*" />
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="4*" />
+                        <ColumnDefinition Width="7*" />
+                    </Grid.ColumnDefinitions>
+
+                    <BoxView Color="White" Grid.ColumnSpan="2" />
+                    <BoxView Color="White" Grid.Row="1" Grid.ColumnSpan="2" />
+                    <BoxView Color="White" Grid.Row="2" Grid.ColumnSpan="2" />
+                    <BoxView Color="White" Grid.Row="3" Grid.ColumnSpan="2" />
+                    <BoxView Color="White" Grid.Row="4" Grid.ColumnSpan="2" />
+                    <BoxView Color="White" Grid.Row="5" Grid.ColumnSpan="2" />
+                    <BoxView Color="White" Grid.Row="6" Grid.ColumnSpan="2" />
+                    <BoxView Color="White" Grid.Row="7" Grid.ColumnSpan="2" />
+                    <BoxView Color="White" Grid.Row="8" Grid.ColumnSpan="2" />
+                    <BoxView Color="White" Grid.Row="9" Grid.ColumnSpan="2" />
+                    <BoxView Color="White" Grid.Row="10" Grid.ColumnSpan="2" />
+                    
+                    <Label Grid.Row="0" Text="공시번호" TextColor="Black" />
+                    <Label x:Name="공시번호" Grid.Row="0" Grid.Column="1"/>
+
+                    <Label Grid.Row="1" Text="상표명" TextColor="Black"/>
+                    <Label x:Name="상표명" Grid.Row="1" Grid.Column="1"/>
+
+                    <Label Text="자재구분"   Grid.Row="2" TextColor="Black"/>
+                    <Label x:Name="자재구분" Grid.Row="2" Grid.Column="1"/>
+
+                    <Label Text="자재명"   Grid.Row="3" TextColor="Black"/>
+                    <Label x:Name="자재명" Grid.Row="3" Grid.Column="1"/>
+
+                    <Label Text="등재일자"   Grid.Row="4" TextColor="Black"/>
+                    <Label x:Name="등재일자" Grid.Row="4" Grid.Column="1"/>
+
+                    <Label Text="공시기간"   Grid.Row="5" TextColor="Black"/>
+                    <Label x:Name="공시기간" Grid.Row="5" Grid.Column="1"/>
+
+                    <Label Text="제조업체"   Grid.Row="6" TextColor="Black"/>
+                    <Label x:Name="제조업체" Grid.Row="6" Grid.Column="1"/>
+
+                    <Label Text="가격"   Grid.Row="7" TextColor="Black"/>
+                    <Label x:Name="가격" Grid.Row="7" Grid.Column="1"/>
+
+                    <Label Text="대표자명"   Grid.Row="8" TextColor="Black"/>
+                    <Label x:Name="대표자명" Grid.Row="8" Grid.Column="1"/>
+
+                    <Label Text="사업장주소"   Grid.Row="9" TextColor="Black"/>
+                    <Label x:Name="사업장주소" Grid.Row="9" Grid.Column="1"/>
+
+                    <Label Text="관리기관명"   Grid.Row="10" TextColor="Black"/>
+                    <Label x:Name="관리기관명" Grid.Row="10" Grid.Column="1"/>
+                </Grid>
+            </Frame>
+        </ScrollView>
+        
+        <!--하단바-->
+        <BoxView Grid.Row="3" BackgroundColor="Gray" HeightRequest="1"/>
+
+    </Grid>
+
+</ContentPage>

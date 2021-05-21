@@ -1,5 +1,6 @@
 ﻿using Farm.Models;
 using Farm.ViewModels;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -16,7 +17,7 @@ namespace Farm.Views
     {
         //readonly string _fileName = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "notes.txt");
 
-
+        private bool isFirstTimeLoad = true;
         private string SearchText { get; set; } 
         public FarmPage()
         {
@@ -33,9 +34,11 @@ namespace Farm.Views
         {
             base.OnAppearing();
 
-            await App.GetInitialData(StatusMessage);
-
-           
+            if (this.isFirstTimeLoad)
+            {
+                await App.GetInitialData(StatusMessage);
+                isFirstTimeLoad = false;
+            }
         }
         //ObservableCollection 을 사용해야 View에서 가져갈수 있다. 
         ObservableCollection<DisclosureHistory> ldsclosurehistory = new ObservableCollection<DisclosureHistory>();
@@ -66,6 +69,7 @@ namespace Farm.Views
             SaveHistory();
             
         }
+
         public void SaveHistory()
         {
             string majorKey = "유기농업자재";
@@ -79,26 +83,27 @@ namespace Farm.Views
 
             Preferences.Set(majorKey + "상표명", saveStr);
         }
-        //async void OnSelectionChanged(object sender, SelectionChangedEventArgs e)
-        //{
-        //    if (e.CurrentSelection != null)
-        //    {
-        //        // Navigate to the NoteEntryPage, passing the filename as a query parameter.
-        //        DisclosureInfomation note = (DisclosureInfomation)e.CurrentSelection.FirstOrDefault();
-        //        await Shell.Current.GoToAsync($"{nameof(DisclosureInfoEntryPage)}?{nameof(DisclosureInfoEntryPage.ItemId)}={note.공시ID}");
-        //    }
-        //}
+     
         async void OnSelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            string current = (e.CurrentSelection.FirstOrDefault() as DisclosureInfomation)?.상표명;
+            var view = sender as CollectionView;
+            if (view.SelectedItem != null && e.CurrentSelection != null)
+            { 
+                DisclosureInfomation note = (DisclosureInfomation)e.CurrentSelection.FirstOrDefault();
+               
+                // Navigate to the NoteEntryPage, passing the filename as a query parameter.
+                //DisclosureInfomation note = (DisclosureInfomation)e.CurrentSelection.FirstOrDefault();
 
-            UpdateHistory(current);
+                string jsonData = JsonConvert.SerializeObject(note);
+                double diff = CustomTitle.Height - SearchTitleLabel.Height;
+                await Shell.Current.GoToAsync($"FarmDetailPage?DisInfo={jsonData}&Key={diff}");
+                
+                string current = (e.CurrentSelection.FirstOrDefault() as DisclosureInfomation)?.상표명;
+                UpdateHistory(current);
 
-            //페이지 이동
-        }
-        public void aaa()
-        {
-            SearchTitleLabel.IsVisible = false;
+                view.SelectedItem = null;
+            }
+
         }
 
         void SearchBarNoUnderline_Focused(object sender, EventArgs e)

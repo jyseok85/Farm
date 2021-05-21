@@ -6,7 +6,7 @@
              xmlns:local ="clr-namespace:Farm"
              >
     <ContentPage.Resources>
-        <Style TargetType="Grid">
+        <Style TargetType="Frame">
             <Setter Property="VisualStateManager.VisualStateGroups">
                 <VisualStateGroupList>
                     <VisualStateGroup x:Name="CommonStates">
@@ -56,7 +56,7 @@
                >
                <Grid>
                 <Grid.RowDefinitions>
-                    <RowDefinition x:Name="CustomTitleGridRow0" Height="6*" />
+                    <RowDefinition x:Name="CustomTitleGridRow0" Height="4*" />
                     <RowDefinition Height="4*" />
                     <RowDefinition Height="1" />
                 </Grid.RowDefinitions>
@@ -66,6 +66,7 @@
                    FontAttributes="Bold"
                    BackgroundColor="Transparent"
                    Padding="20,20,20,0"
+                   VerticalOptions="EndAndExpand"
                    Text="검색" />
 
                 <!--검색상자-->
@@ -228,14 +229,14 @@
                         <Grid RowSpacing="0" ColumnSpacing="0" >
                             <Grid.RowDefinitions>
                                 <RowDefinition Height="3" />
-                                <RowDefinition Height="*" />
+                                <RowDefinition Height="Auto" />
                             </Grid.RowDefinitions>
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="1*" />
                                 <ColumnDefinition Width="1*" />
                                 <ColumnDefinition Width="1*" />
                                 <ColumnDefinition Width="15*" />
-                                <ColumnDefinition Width="10*" />
+                                <ColumnDefinition Width="12*" />
                             </Grid.ColumnDefinitions>
                             <!--Source="{local:ImageResource Farm.Resources.FarmSubtitle1.png}"-->
                             <!--<Image Source="{local:ImageResource Farm.Resources.FarmSubtitle1.png}"
@@ -271,20 +272,21 @@
                             <Label x:Name="SearchResultMessage" 
                        Grid.Column="4"
                        Grid.Row="1"
-                       HorizontalTextAlignment="End"
+                       HorizontalTextAlignment="Start"
                        VerticalTextAlignment="End"
                        FontSize="Caption"
+                       MaxLines="1"
+                       
                        Text="(총 조회건수 : 0 건)" />
                         </Grid>
 
                     </Grid>
-                    <CollectionView 
+                    <CollectionView
                         ItemsSource="{Binding CollectionViewItems}"
                         RemainingItemsThreshold="5"
                         RemainingItemsThresholdReached="OnCollectionViewRemainingItemsThresholdReached" 
                         RemainingItemsThresholdReachedCommand="{Binding LoadMoreDataCommand}"
                         Grid.Row="1"
-                        BackgroundColor="Transparent"
                         SelectionMode="Single"
                         SelectionChanged="OnSelectionChanged"
                 >

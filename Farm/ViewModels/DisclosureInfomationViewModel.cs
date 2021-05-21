@@ -223,9 +223,6 @@ namespace Farm.ViewModels
             Preferences.Set(majorKey + "제조업체명", info.제조업체명);
             Preferences.Set(majorKey + "공시번호", info.공시번호);
             Preferences.Set(majorKey + "공시기간", info.공시기간);
-
-
-
         }
 
         #region INotifyPropertyChanged

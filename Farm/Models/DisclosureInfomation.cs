@@ -13,39 +13,41 @@ namespace Farm.Models
 {
     public class DisclosureInfomation
     {
-        public string ROW_NUM { get; set; }
+        public string ROW_NUM { get; set; } = string.Empty;
 
         [JsonProperty("PBLNTF_ID")]
-        public string 공시ID { get; set; }
+        public string 공시ID { get; set; } = string.Empty;
         [JsonProperty("PBLNTF_NO")]
-        public string 공시번호 { get; set; }
+        public string 공시번호 { get; set; } = string.Empty;
         [JsonProperty("MTRIL_TYPE_NM")]
-        public string 자재구분 { get; set; }
+        public string 자재구분 { get; set; } = string.Empty;
         [JsonProperty("MTRIL_NM")]
-        public string 자재명칭 { get; set; }
+        public string 자재명칭 { get; set; } = string.Empty;
         [JsonProperty("PRODUCT_NM")]
-        public string 상표명 { get; set; }
+        public string 상표명 { get; set; } = string.Empty;
         [JsonProperty("PBLNTF_REGST_DE")]
-        public string 등재일자 { get; set; }
+        public string 등재일자 { get; set; } = string.Empty;
         [JsonProperty("PBLNTF_BEGIN_DE")]
-        public string 공시시작 { get; set; }
+        public string 공시시작 { get; set; } = string.Empty;
         [JsonProperty("PBLNTF_END_DE")]
-        public string 공시종료 { get; set; }
+        public string 공시종료 { get; set; } = string.Empty;
         [JsonProperty("PRODUCT_PC")]
-        public string 가격 { get; set; }
+        public string 가격 { get; set; } = string.Empty;
         [JsonProperty("CMPNY_NM")]
-        public string 제조업체명 { get; set; }
+        public string 제조업체명 { get; set; } = string.Empty;
         [JsonProperty("CEO_NM")]
-        public string 대표자명 { get; set; }
+        public string 대표자명 { get; set; } = string.Empty;
         [JsonProperty("BPLC_ADRES")]
-        public string 사업장주소 { get; set; }
+        public string 사업장주소 { get; set; } = string.Empty;
         [JsonProperty("MANAGE_INSTT_NM")]
-        public string 관리기관명 { get; set; }
+        public string 관리기관명 { get; set; } = string.Empty;
 
+        [JsonIgnore]
         public string 공시만료일_색상 { get; set; } = "Transparent";
-        public string 공시만료일_텍스트 { get; set; } = "";
+        [JsonIgnore]
+        public string 공시만료일_텍스트 { get; set; } = string.Empty;
 
-        public string 공시기간 { get; set; }
+        public string 공시기간 { get; set; } = string.Empty;
     }
 
 
