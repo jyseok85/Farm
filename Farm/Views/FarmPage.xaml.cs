@@ -95,7 +95,7 @@ namespace Farm.Views
                 //DisclosureInfomation note = (DisclosureInfomation)e.CurrentSelection.FirstOrDefault();
 
                 string jsonData = JsonConvert.SerializeObject(note);
-                double diff = CustomTitle.Height - SearchTitleLabel.Height;
+                double diff = ((double)CustomTitle.Height - 1) / 2;
                 await Shell.Current.GoToAsync($"FarmDetailPage?DisInfo={jsonData}&Key={diff}");
                 
                 string current = (e.CurrentSelection.FirstOrDefault() as DisclosureInfomation)?.상표명;
@@ -120,7 +120,8 @@ namespace Farm.Views
         private async Task CloseLabel()
         {
             //double yValue = ((double)CustomTitle.Height) - SearchControl.Height;
-            double yValue = SearchTitleLabel.Height;
+            double yValue = ((double)CustomTitle.Height - 1) / 2;
+            //double yValue = SearchTitleLabel.Height;
             _ = CustomTitle.TranslateTo(0, -yValue);
             _ = Body.TranslateTo(0, -yValue);
 

@@ -140,7 +140,11 @@ namespace Farm.ViewModels
 
         public List<DisclosureInfomation> SearchAllText(string text)
         {
+            if (App.DisInfo == null)
+                return new List<DisclosureInfomation>();
+
             SearchResult.Clear();
+
             Stopwatch sw = new Stopwatch();
             sw.Start();
 

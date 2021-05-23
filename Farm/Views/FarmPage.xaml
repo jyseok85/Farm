@@ -65,7 +65,7 @@
                    TextColor="Black"
                    FontAttributes="Bold"
                    BackgroundColor="Transparent"
-                   Padding="20,20,20,0"
+                   Padding="20,0,20,0"
                    VerticalOptions="EndAndExpand"
                    Text="검색" />
 
@@ -272,7 +272,7 @@
                             <Label x:Name="SearchResultMessage" 
                        Grid.Column="4"
                        Grid.Row="1"
-                       HorizontalTextAlignment="Start"
+                       HorizontalTextAlignment="End"
                        VerticalTextAlignment="End"
                        FontSize="Caption"
                        MaxLines="1"

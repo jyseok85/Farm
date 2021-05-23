@@ -39,7 +39,7 @@ namespace Farm.Views
             {
                 double defaultHeight = 30;
                 Double.TryParse(value, out defaultHeight);
-                //Header.HeightRequest = defaultHeight;
+                Header.HeightRequest = defaultHeight;
             }
         }
         async void BackButtonPressed(object sender, EventArgs e)
