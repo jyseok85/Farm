@@ -39,10 +39,10 @@
     </Shell.SearchHandler>-->
 
 
-<Grid x:Name="Contents" RowSpacing="0" BackgroundColor="Transparent">
+    <Grid x:Name="Contents" RowSpacing="0" BackgroundColor="Transparent" >
         <Grid.RowDefinitions>
-            <RowDefinition Height="Auto" />
-            <RowDefinition Height="*" />
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
 
 
@@ -143,8 +143,8 @@
                         <RowDefinition Height="*" />
                     </Grid.RowDefinitions>
 
-                    <Label Grid.Row="0"
-                       Text="최근 조회 항목" 
+                    <Label Text="최근 조회 항목" 
+                        Grid.Row="0"
                        FontAttributes="Bold"
                        FontSize="Medium"
                        Margin="20,10,20,0"
@@ -152,16 +152,81 @@
                            />
                     <!--최근조회아이템-->
                     <Frame  CornerRadius = "10"
-                HeightRequest = "120"
-                BackgroundColor = "White"
-                OutlineColor = "#77C243"
-                HorizontalOptions = "FillAndExpand"
-                VerticalOptions = "Center"
-                Margin = "20,0,20,10"
-                Padding="5"
-                Grid.Row="1"
-                >
+                            HeightRequest = "120"
+                            BackgroundColor = "White"
+                            OutlineColor = "#77C243"
+                            HorizontalOptions = "FillAndExpand"
+                            VerticalOptions = "Center"
+                            Margin = "20,0,20,10"
+                            Padding="5"
+                            Grid.Row="1"
+                            >
+                        <CollectionView 
+                        x:Name="LastSelectedItem"
+                        Margin="5"
+                        SelectionMode="Single"
+                        SelectionChanged="OnHistorySelectionChanged"
+                        ItemSizingStrategy="MeasureFirstItem"
+                        >
+                            <CollectionView.ItemTemplate>
+                                <DataTemplate>
+                                    <Grid>
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition Height="Auto" />
+                                            <RowDefinition Height="Auto" />
+                                            <RowDefinition Height="Auto" />
+                                            <RowDefinition Height="Auto" />
+                                        </Grid.RowDefinitions>
 
+                                        <Grid Grid.Row="0">
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="*"/>
+                                                <ColumnDefinition Width="Auto"/>
+                                            </Grid.ColumnDefinitions>
+                                            <Label Grid.Column="0"
+                                                                   Text="{Binding 상표명}"
+                                                                   FontAttributes="Bold"
+                                                                   FontSize="Medium"
+                                                                   Margin="10,2,10,2"
+                                                                   BackgroundColor="Transparent"
+                                                                   TextColor="Black" 
+                                                                      />
+                                            <Frame Grid.Column="1"
+                                                                   CornerRadius="5"
+                                                                   BackgroundColor="{Binding 공시만료일_색상}"
+                                                                   Padding="3,0,3,0"
+                                                                   Margin="7">
+                                                <Label 
+                                                                    Text="{Binding 공시만료일_텍스트}"
+                                                                    VerticalTextAlignment="Center"
+                                                                    FontSize="Caption"
+                                                                    TextColor="WhiteSmoke"
+                                                                    />
+                                            </Frame>
+                                        </Grid>
+                                        
+                                        <Label Grid.Row="1"
+                                                       Text="{Binding 제조업체명}"
+                                                       Margin="10,0,10,0"
+                                                       FontSize="Small"
+                                                       BackgroundColor="Transparent"/>
+
+                                        <Label Grid.Row="2"
+                                                       Text="{Binding 공시번호}"
+                                                       Margin="10,0,10,0"
+                                                       FontSize="Small"
+                                                       BackgroundColor="Transparent"/>
+
+                                        <Label Grid.Row="3"
+                                                       Text="{Binding 공시기간}"
+                                                       Margin="10,0,10,2"
+                                                       FontSize="Small"
+                                                       BackgroundColor="Transparent"
+                                                       />
+                                    </Grid>
+                                </DataTemplate>
+                            </CollectionView.ItemTemplate>
+                        </CollectionView>
                     </Frame>
                     <Label Grid.Row="2"
                        Text="조회 이력..." 
@@ -181,8 +246,9 @@
                 >
                         <CollectionView 
                         x:Name="HistoryCollectionView"
-                        SelectionMode="None"
-                        Margin="20,0,20,0"
+                        SelectionMode="Single"
+                        SelectionChanged="OnHistorySelectionChanged"
+                        Margin="15,15,15,10"
                     >
                             <CollectionView.ItemTemplate>
                                 <DataTemplate>
@@ -190,7 +256,7 @@
                                     <Frame  BackgroundColor="Transparent" Padding="0">
                                         <!--테두리를 위한 프레임-->
                                         <Frame  BackgroundColor="White" Padding="1">
-                                            <Grid Padding="0" RowSpacing="0">
+                                            <Grid Padding="0" RowSpacing="3">
                                                 <Grid.RowDefinitions>
                                                     <RowDefinition Height="Auto" />
                                                     <RowDefinition Height="Auto" />
@@ -218,7 +284,6 @@
                 <Grid x:Name="SearchItemBody"
               IsVisible="false"
               BackgroundColor="Transparent"
-                  
               >
                     <Grid.RowDefinitions>
                         <RowDefinition Height="Auto" />

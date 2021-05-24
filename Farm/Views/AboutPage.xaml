@@ -3,30 +3,65 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="Farm.Views.AboutPage"
              Title="About">
-    <Grid RowDefinitions="Auto,*">
-        <Image Source="xamarin_logo.png"
-               BackgroundColor="{OnPlatform iOS=LightSlateGray, Android=#2196F3}"
-               VerticalOptions="Center"
-               HeightRequest="64" />
-        <!-- Layout children vertically -->
-        <StackLayout Grid.Row="1"
-                     Margin="20"
-                     Spacing="20">
-            <Label FontSize="22">
-                <Label.FormattedText>
-                    <FormattedString>
-                        <FormattedString.Spans>
-                            <Span Text="Notes"
-                                  FontAttributes="Bold"
-                                  FontSize="22" />
-                            <Span Text=" v1.0" />
-                        </FormattedString.Spans>
-                    </FormattedString>
-                </Label.FormattedText>
-            </Label>
-            <Label Text="This app is written in XAML and C# with the Xamarin Platform." />
-            <Button Text="Learn more"
-                    Clicked="OnButtonClicked" />
-        </StackLayout>
+
+    <ContentPage.Background>
+        <!-- StartPoint defaults to (0,0) -->
+        <LinearGradientBrush EndPoint="0,1">
+            <GradientStop Color="#40c1c6"
+                          Offset="0.1" />
+            <GradientStop Color="#47b74b"
+                          Offset="1.0" />
+        </LinearGradientBrush>
+    </ContentPage.Background>
+    <StackLayout Padding="10" Margin="20">
+    <Grid Grid.Row="0" Padding="1" Margin="0,50,0,10" HorizontalOptions="Center" VerticalOptions="Center">
+        <Grid RowSpacing="0" ColumnSpacing="0" >
+            <Grid.RowDefinitions>
+                <RowDefinition Height="5"/>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="1*" />
+                <ColumnDefinition Width="1*" />
+                <ColumnDefinition Width="1*" />
+                <ColumnDefinition Width="15*" />
+            </Grid.ColumnDefinitions>
+            <Frame Grid.Row="0"
+                           Grid.Column="0"
+                           BackgroundColor="Red"
+                           >
+            </Frame>
+            <Frame Grid.Row="0"
+                           Grid.Column="1"
+                           BackgroundColor="Orange"
+                           >
+            </Frame>
+            <Frame Grid.Row="0"
+                           Grid.Column="2"
+                           BackgroundColor="Green"
+                           >
+            </Frame>
+            <Label 
+                       Grid.Column="0"
+                       Grid.Row="1"
+                       Grid.ColumnSpan="4"
+                       HorizontalTextAlignment="Start"
+                       VerticalTextAlignment="End"
+                       FontSize="32"
+                       FontAttributes="Bold"
+                       TextColor="Black"
+                       Text="유기농업자재 공시현황" />
+            
+        </Grid>
+
     </Grid>
+    <Label Text="- 이 앱은 농민분들의 편의를 위해서 제작되었습니다."></Label>
+    <Label Text="- 행정처분조회 기능이 업데이트 예정입니다."></Label>
+    <Label Text="강원대학교 산악협력단"
+           FontSize="Subtitle"
+           VerticalOptions="EndAndExpand"
+           HorizontalOptions="Center"
+           ></Label>
+    </StackLayout>
 </ContentPage>

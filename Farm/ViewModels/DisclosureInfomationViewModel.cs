@@ -87,8 +87,20 @@ namespace Farm.ViewModels
         private void 공시종료일에따른_컨트롤배경_색상계산(DisclosureInfomation info)
         {
             string enddate = info.공시종료;
-            enddate = enddate.Insert(6, " ");
-            enddate = enddate.Insert(4, " ");
+            try
+            {
+                enddate = enddate.Insert(6, " ");
+                enddate = enddate.Insert(4, " ");
+            }
+            catch(Exception ex)
+            {
+                if(info.공시번호.Contains("부적합"))
+                {
+                    info.공시만료일_색상 = "#ff0000";
+                    info.공시만료일_텍스트 = "부적합";
+                }
+                return;
+            }
             DateTime endDateTime = Convert.ToDateTime(enddate);
             int result = DateTime.Compare(DateTime.Now, endDateTime);
             if (result > 0)
@@ -99,7 +111,7 @@ namespace Farm.ViewModels
             else
             {
                 int furtureResult = DateTime.Compare( DateTime.Now.AddMonths(1), endDateTime);
-                if (result > 0)
+                if (furtureResult > 0)
                 {
                     info.공시만료일_색상 = "#ffb226";
                     info.공시만료일_텍스트 = "만료예정";
@@ -117,13 +129,26 @@ namespace Farm.ViewModels
         {
 
             string startDate = info.공시시작;
-            startDate = startDate.Insert(6, ".");
-            startDate = startDate.Insert(4, ".");
+            try
+            {
+                startDate = startDate.Insert(6, ".");
+                startDate = startDate.Insert(4, ".");
+            }
+            catch
+            {
+
+            }
+
 
             string enddate = info.공시종료;
-            enddate = enddate.Insert(6, ".");
-            enddate = enddate.Insert(4, ".");
-
+            try
+            {
+                enddate = enddate.Insert(6, ".");
+                enddate = enddate.Insert(4, ".");
+            }
+            catch
+            {
+            }
             info.공시기간 = startDate + " ~ " + enddate;
         }
         /// <summary>

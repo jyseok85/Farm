@@ -22,9 +22,10 @@ namespace Farm.Views
         public FarmPage()
         {
             InitializeComponent();
-            SearchItemBody.TranslationY= -SearchTitleLabel.Height;
-            HistoryCollectionView.ItemsSource = ldsclosurehistory;
-            GetHistory();
+            LoadHistory();
+            HistoryCollectionView.ItemsSource = SelectedHistory;
+            LastSelectedItem.ItemsSource = LastSelected;
+
         }
 
         /// <summary>
@@ -36,54 +37,65 @@ namespace Farm.Views
 
             if (this.isFirstTimeLoad)
             {
+                //SearchItemBody.TranslationY = -SearchTitleLabel.Height;
+                //SearchItemBody.HeightRequest = SearchItemBody.HeightRequest + SearchTitleLabel.Height;
+                
                 await App.GetInitialData(StatusMessage);
                 isFirstTimeLoad = false;
             }
+
+            await Task.Delay(2000);
         }
         //ObservableCollection 을 사용해야 View에서 가져갈수 있다. 
-        ObservableCollection<DisclosureHistory> ldsclosurehistory = new ObservableCollection<DisclosureHistory>();
-        private void GetHistory()
-        {
-            string majorKey = "유기농업자재";
+        ObservableCollection<DisclosureInfomation> SelectedHistory = new ObservableCollection<DisclosureInfomation>();
+        ObservableCollection<DisclosureInfomation> LastSelected = new ObservableCollection<DisclosureInfomation>();
 
-            string history = Preferences.Get(majorKey + "History", "");
-            List<string> lHistory = history.Split('_').ToList();
-            string labelText = string.Empty;
-            foreach (string str in lHistory)
+        private void LoadHistory()
+        {
+            if (File.Exists(App.HistoryPath))
             {
-                DisclosureHistory dh = new DisclosureHistory();
-                dh.상표명 = str;
-                ldsclosurehistory.Add(dh);
+                string jsonData = File.ReadAllText(App.HistoryPath);
+                SelectedHistory = JsonConvert.DeserializeObject<ObservableCollection<DisclosureInfomation>>(jsonData);
+                if (SelectedHistory.Count > 0)
+                {
+                    LastSelected.Clear();
+                    LastSelected.Add(SelectedHistory[0]);
+                }
             }
         }
-        public void UpdateHistory(string value)
+        private void SaveHistory(DisclosureInfomation note)
         {
-            DisclosureHistory dh = new DisclosureHistory();
-            dh.상표명 = value;
-            ldsclosurehistory.Insert(0, dh);
-
-            if(ldsclosurehistory.Count > 10)
+            if (SelectedHistory.Contains(note))
             {
-                ldsclosurehistory.RemoveAt(10);
+                SelectedHistory.Remove(note);
             }
-            SaveHistory();
-            
-        }
-
-        public void SaveHistory()
-        {
-            string majorKey = "유기농업자재";
-
-            string saveStr = string.Empty;
-
-            foreach(DisclosureHistory history in ldsclosurehistory)
+            else if (SelectedHistory.Count > 10)
             {
-                saveStr += history.상표명 + "_" + saveStr;
+                SelectedHistory.RemoveAt(SelectedHistory.Count - 1);
             }
 
-            Preferences.Set(majorKey + "상표명", saveStr);
+            SelectedHistory.Insert(0, note);
+            if (SelectedHistory.Count > 0)
+            {
+                LastSelected.Clear();
+                LastSelected.Add(SelectedHistory[0]);
+            }
+
+            string jsonStr = JsonConvert.SerializeObject(SelectedHistory.Distinct());
+            File.WriteAllText(App.HistoryPath, jsonStr);
         }
-     
+        async void OnHistorySelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            var view = sender as CollectionView;
+            if (view.SelectedItem != null && e.CurrentSelection != null)
+            {
+                DisclosureInfomation note = (DisclosureInfomation)e.CurrentSelection.FirstOrDefault();
+                string jsonData = JsonConvert.SerializeObject(note);
+                double diff = ((double)CustomTitle.Height - 1) / 2;
+                await Shell.Current.GoToAsync($"FarmDetailPage?DisInfo={jsonData}&Key={diff}");
+            }
+            view.SelectedItem = null;
+        }
         async void OnSelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             var view = sender as CollectionView;
@@ -97,10 +109,8 @@ namespace Farm.Views
                 string jsonData = JsonConvert.SerializeObject(note);
                 double diff = ((double)CustomTitle.Height - 1) / 2;
                 await Shell.Current.GoToAsync($"FarmDetailPage?DisInfo={jsonData}&Key={diff}");
-                
-                string current = (e.CurrentSelection.FirstOrDefault() as DisclosureInfomation)?.상표명;
-                UpdateHistory(current);
 
+                SaveHistory(note);
                 view.SelectedItem = null;
             }
 
@@ -124,7 +134,7 @@ namespace Farm.Views
             //double yValue = SearchTitleLabel.Height;
             _ = CustomTitle.TranslateTo(0, -yValue);
             _ = Body.TranslateTo(0, -yValue);
-
+            Body.Margin = new Thickness(0, 0, 0, -yValue);
            // CancelButton.Text = "취";
             while (GridCancelButtonArea.Width.Value < 1 && this.isShowLabel == false)
             {
@@ -144,6 +154,8 @@ namespace Farm.Views
         {
             _ = CustomTitle.TranslateTo(0, 0);
             _ = Body.TranslateTo(0, 0);
+
+            Body.Margin = 0;
 
             while (this.isShowLabel == true)
             {

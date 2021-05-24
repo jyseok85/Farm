@@ -19,6 +19,9 @@
 
 
   <ItemGroup>
+    <Compile Update="Views\AboutPageSample.xaml.cs">
+      <DependentUpon>AboutPageSample.xaml</DependentUpon>
+    </Compile>
     <Compile Update="Views\FarmPage2.xaml.cs">
       <DependentUpon>FarmPage2.xaml</DependentUpon>
     </Compile>
@@ -35,9 +38,6 @@
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
     <EmbeddedResource Update="Views\FarmPage.xaml">
-      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
-    </EmbeddedResource>
-    <EmbeddedResource Update="Views\LoadingPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
   </ItemGroup>

@@ -13,6 +13,7 @@ namespace Farm
     {
         public static string FolderPath { get; private set; }
         public static string AppDataPath { get; private set; }
+        public static string HistoryPath { get; private set; }
 
         public static IList<DisclosureInfomation> DisInfo { get; set; }
         public static IList<DisclosureInfomation> DisSearchInfo { get; set; }
@@ -23,7 +24,7 @@ namespace Farm
             FolderPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData));
 
             AppDataPath = Path.Combine(FileSystem.AppDataDirectory, "data.json");
-            //MainPage = new LoadingPage();
+            HistoryPath = Path.Combine(FileSystem.AppDataDirectory, "data_history.json");
 
             MainPage = new AppShell();
            
