@@ -18,6 +18,7 @@ namespace OganicInput
         public static IList<DisclosureInfomation> DisInfo { get; set; }
         public static IList<DisclosureInfomation> DisSearchInfo { get; set; }
 
+        public static bool IsFirstLoad { get; set; } = true;
         public App()
         {
             InitializeComponent();

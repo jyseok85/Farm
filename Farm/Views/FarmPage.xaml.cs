@@ -17,7 +17,6 @@ namespace OganicInput.Views
     {
         //readonly string _fileName = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "notes.txt");
 
-        private bool isFirstTimeLoad = true;
         private string SearchText { get; set; } 
         public OganicInputPage()
         {
@@ -35,9 +34,9 @@ namespace OganicInput.Views
         {
             base.OnAppearing();
 
-            if (this.isFirstTimeLoad)
+            if (App.IsFirstLoad)
             {
-                isFirstTimeLoad = false;
+                App.IsFirstLoad = false;
                 await Navigation.PushModalAsync(new LoadingView());
             }
         }
