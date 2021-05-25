@@ -3,13 +3,13 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.31205.134
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Farm.UWP", "Farm.UWP\Farm.UWP.csproj", "{1C1BC1AC-1546-4C54-848F-6307B8B379B8}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OganicInput.UWP", "Farm.UWP\OganicInput.UWP.csproj", "{1C1BC1AC-1546-4C54-848F-6307B8B379B8}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Farm.Android", "Farm.Android\Farm.Android.csproj", "{560341AF-2E6E-4093-83F5-E89E4DA70516}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OganicInput.Android", "Farm.Android\OganicInput.Android.csproj", "{560341AF-2E6E-4093-83F5-E89E4DA70516}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Farm.iOS", "Farm.iOS\Farm.iOS.csproj", "{FCDD4EED-011F-4659-B65B-5B639CB1EEF8}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OganicInput.iOS", "Farm.iOS\OganicInput.iOS.csproj", "{FCDD4EED-011F-4659-B65B-5B639CB1EEF8}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Farm", "Farm\Farm.csproj", "{5A6C52B2-6606-47AA-8528-FF4C5CE4AB29}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OganicInput", "Farm\OganicInput.csproj", "{5A6C52B2-6606-47AA-8528-FF4C5CE4AB29}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "test", "test\test.csproj", "{97529B4F-2DB1-4AE3-8508-19ADD8FBFDCA}"
 EndProject

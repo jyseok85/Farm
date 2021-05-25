@@ -3,7 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace Farm.Models
+namespace OganicInput.Models
 {
     public class DisclosureInfomation
     {

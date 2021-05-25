@@ -5,7 +5,7 @@ using System.Linq;
 using Foundation;
 using UIKit;
 
-namespace Farm.iOS
+namespace OganicInput.iOS
 {
     public class Application
     {

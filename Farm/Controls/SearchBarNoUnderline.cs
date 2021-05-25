@@ -1,9 +1,9 @@
-﻿using Farm.Views;
+﻿using OganicInput.Views;
 using System;
 using System.Collections.Generic;
 using System.Text;
 using Xamarin.Forms;
-namespace Farm.Controls
+namespace OganicInput.Controls
 {
     public class SearchBarNoUnderline : SearchBar
     {

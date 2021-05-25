@@ -13,7 +13,7 @@ using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
 
-namespace Farm.UWP
+namespace OganicInput.UWP
 {
     public sealed partial class MainPage
     {
@@ -21,7 +21,7 @@ namespace Farm.UWP
         {
             this.InitializeComponent();
 
-            LoadApplication(new Farm.App());
+            LoadApplication(new OganicInput.App());
         }
     }
 }

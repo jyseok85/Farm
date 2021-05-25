@@ -5,16 +5,12 @@
     android:gravity="center_vertical"
     android:background="#00563a"
     android:id="@+id/splashview"
-    android:layout_width="match_parent">
+    android:layout_width="match_parent"
+    android:minWidth="25px"
+    android:minHeight="25px">
 
     <!-- 벡터 그래픽은 미리보기가 안됨.-->
-    <ImageView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:src="@drawable/splash_logo"
-        android:layout_centerInParent="true"
-    />
-       <!-- <TextView
+    <!-- <TextView
         android:id="@+id/txtDescription"
         android:text="test"
         android:layout_width="wrap_content"
@@ -26,4 +22,13 @@
         android:textSize="12sp"
         android:gravity= "bottom"
         android:layout_centerHorizontal="true"/>-->
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/splash_logo"
+        android:layout_centerInParent="true"
+        android:id="@+id/imageView1" 
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="50dp"
+    />
 </RelativeLayout>

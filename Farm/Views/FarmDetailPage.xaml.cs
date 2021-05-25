@@ -1,4 +1,4 @@
-﻿using Farm.Models;
+﻿using OganicInput.Models;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
@@ -9,11 +9,11 @@ using System.Threading.Tasks;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
-namespace Farm.Views
+namespace OganicInput.Views
 {
     [QueryProperty(nameof(Key), nameof(Key))]
     [QueryProperty(nameof(DisInfo), nameof(DisInfo))]
-    public partial class FarmDetailPage : ContentPage
+    public partial class OganicInputDetailPage : ContentPage
     {
 
         public string DisInfo
@@ -46,7 +46,7 @@ namespace Farm.Views
         {
             await Shell.Current.GoToAsync("..");
         }
-        public FarmDetailPage()
+        public OganicInputDetailPage()
         {
             InitializeComponent();
 

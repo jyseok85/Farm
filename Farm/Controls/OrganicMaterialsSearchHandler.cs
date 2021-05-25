@@ -1,6 +1,6 @@
-﻿using Farm;
-using Farm.Models;
-using Farm.Views;
+﻿using OganicInput;
+using OganicInput.Models;
+using OganicInput.Views;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -8,7 +8,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Xamarin.Forms;
 
-namespace Farm.Controls
+namespace OganicInput.Controls
 {
     public class OrganicMaterialsSearchHandler: SearchHandler
     {

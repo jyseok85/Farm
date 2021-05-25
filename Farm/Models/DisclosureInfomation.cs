@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 using System.Windows.Input;
 using Xamarin.Forms;
 
-namespace Farm.Models
+namespace OganicInput.Models
 {
     public class DisclosureInfomation
     {

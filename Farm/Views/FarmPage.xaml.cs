@@ -1,5 +1,5 @@
-﻿using Farm.Models;
-using Farm.ViewModels;
+﻿using OganicInput.Models;
+using OganicInput.ViewModels;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
@@ -11,15 +11,15 @@ using Xamarin.Essentials;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
-namespace Farm.Views
+namespace OganicInput.Views
 {
-    public partial class FarmPage : ContentPage
+    public partial class OganicInputPage : ContentPage
     {
         //readonly string _fileName = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "notes.txt");
 
         private bool isFirstTimeLoad = true;
         private string SearchText { get; set; } 
-        public FarmPage()
+        public OganicInputPage()
         {
             InitializeComponent();
             LoadHistory();
@@ -37,15 +37,11 @@ namespace Farm.Views
 
             if (this.isFirstTimeLoad)
             {
-                //SearchItemBody.TranslationY = -SearchTitleLabel.Height;
-                //SearchItemBody.HeightRequest = SearchItemBody.HeightRequest + SearchTitleLabel.Height;
-                
-                await App.GetInitialData(StatusMessage);
                 isFirstTimeLoad = false;
+                await Navigation.PushModalAsync(new LoadingView());
             }
-
-            await Task.Delay(2000);
         }
+
         //ObservableCollection 을 사용해야 View에서 가져갈수 있다. 
         ObservableCollection<DisclosureInfomation> SelectedHistory = new ObservableCollection<DisclosureInfomation>();
         ObservableCollection<DisclosureInfomation> LastSelected = new ObservableCollection<DisclosureInfomation>();
@@ -91,8 +87,8 @@ namespace Farm.Views
             {
                 DisclosureInfomation note = (DisclosureInfomation)e.CurrentSelection.FirstOrDefault();
                 string jsonData = JsonConvert.SerializeObject(note);
-                double diff = ((double)CustomTitle.Height - 1) / 2;
-                await Shell.Current.GoToAsync($"FarmDetailPage?DisInfo={jsonData}&Key={diff}");
+                double diff = ((double)CustomTitle.Height - 10) / 2;
+                await Shell.Current.GoToAsync($"OganicInputDetailPage?DisInfo={jsonData}&Key={diff}");
             }
             view.SelectedItem = null;
         }
@@ -108,7 +104,7 @@ namespace Farm.Views
 
                 string jsonData = JsonConvert.SerializeObject(note);
                 double diff = ((double)CustomTitle.Height - 1) / 2;
-                await Shell.Current.GoToAsync($"FarmDetailPage?DisInfo={jsonData}&Key={diff}");
+                await Shell.Current.GoToAsync($"OganicInputDetailPage?DisInfo={jsonData}&Key={diff}");
 
                 SaveHistory(note);
                 view.SelectedItem = null;
@@ -120,7 +116,7 @@ namespace Farm.Views
         {
             //SearchBar searchBar = (SearchBar)sender;
             //searchResults.ItemsSource = DataService.GetSearchResults(searchBar.Text);
-            //((FarmPage)Shell.Current.CurrentPage).aaa();
+            //((OganicInputPage)Shell.Current.CurrentPage).aaa();
             isShowLabel = false;
 #pragma warning disable CS4014 // 이 호출을 대기하지 않으므로 호출이 완료되기 전에 현재 메서드가 계속 실행됩니다.
             CloseLabel();
@@ -130,7 +126,7 @@ namespace Farm.Views
         private async Task CloseLabel()
         {
             //double yValue = ((double)CustomTitle.Height) - SearchControl.Height;
-            double yValue = ((double)CustomTitle.Height - 1) / 2;
+            double yValue = ((double)CustomTitle.Height - 10) / 2;
             //double yValue = SearchTitleLabel.Height;
             _ = CustomTitle.TranslateTo(0, -yValue);
             _ = Body.TranslateTo(0, -yValue);

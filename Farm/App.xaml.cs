@@ -1,5 +1,5 @@
-﻿using Farm.Models;
-using Farm.Views;
+﻿using OganicInput.Models;
+using OganicInput.Views;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 using Xamarin.Essentials;
 using Xamarin.Forms;
 
-namespace Farm
+namespace OganicInput
 {
     public partial class App : Application
     {
@@ -45,13 +45,6 @@ namespace Farm
 
         }
 
-        internal static async Task GetInitialData(Label label)
-        {
-            if (DisInfo == null)
-            {
-                Loading loading = new Loading();
-                await loading.InitDataSetting(label);
-            }
-        }
+       
     }
 }

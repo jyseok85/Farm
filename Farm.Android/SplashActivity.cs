@@ -7,11 +7,13 @@ using Android.OS;
 using System.Threading.Tasks;
 using Android.Util;
 using Android.Content;
-using Farm.Models;
+using OganicInput.Models;
 using Android.Widget;
 using Android.Views;
+using OganicInput.Droid;
+using AndroidX.Core.View;
 
-namespace Farm.Droid
+namespace OganicInput.Droid
 {
     [Activity(Theme = "@style/MyTheme.Splash", MainLauncher = true, NoHistory = true)]
     public class SplashActivity : global::Xamarin.Forms.Platform.Android.FormsAppCompatActivity
@@ -21,7 +23,9 @@ namespace Farm.Droid
         protected override void OnCreate(Bundle savedInstanceState)
         {
             base.OnCreate(savedInstanceState);
-            Window.DecorView.SystemUiVisibility = StatusBarVisibility.Hidden;
+#pragma warning disable CS0618 // 형식 또는 멤버는 사용되지 않습니다.
+            //Window.DecorView.SystemUiVisibility = StatusBarVisibility.Hidden;
+#pragma warning restore CS0618 // 형식 또는 멤버는 사용되지 않습니다.
             SetContentView(Resource.Layout.Splash);
             //FindViewById<TextView>(Resource.Id.txtDescription).Text = $"Version {PackageManager.GetPackageInfo(PackageName, 0).VersionName}";
         }
@@ -32,7 +36,6 @@ namespace Farm.Droid
             Task startupWork = new Task(() => { SimulateStartup(); });
             startupWork.Start();
         }
-
         // Prevent the back button from canceling the startup process
         public override void OnBackPressed() { }
 

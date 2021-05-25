@@ -7,8 +7,8 @@
     <ProjectTypeGuids>{EFBA0AD7-5A72-4C68-AF49-83D382785DCF};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
     <TemplateGuid>{6968b3a4-1835-46a3-ac5c-1ae33b475983}</TemplateGuid>
     <OutputType>Library</OutputType>
-    <RootNamespace>Farm.Droid</RootNamespace>
-    <AssemblyName>Farm.Android</AssemblyName>
+    <RootNamespace>OganicInput.Droid</RootNamespace>
+    <AssemblyName>OganicInput.Android</AssemblyName>
     <Deterministic>True</Deterministic>
     <AndroidApplication>True</AndroidApplication>
     <AndroidResgenFile>Resources\Resource.designer.cs</AndroidResgenFile>
@@ -66,6 +66,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <PackageReference Include="Acr.UserDialogs">
+      <Version>7.1.0.514</Version>
+    </PackageReference>
     <PackageReference Include="Plugin.CurrentActivity">
       <Version>2.1.0.4</Version>
     </PackageReference>
@@ -96,9 +99,9 @@
     <AndroidResource Include="Resources\drawable\icon_feed.png" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Farm\Farm.csproj">
-      <Project>{54634B03-4121-40D6-BEED-F38C1D3E974D}</Project>
-      <Name>Farm</Name>
+    <ProjectReference Include="..\Farm\OganicInput.csproj">
+      <Project>{5A6C52B2-6606-47AA-8528-FF4C5CE4AB29}</Project>
+      <Name>OganicInput</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

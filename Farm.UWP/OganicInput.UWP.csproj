@@ -148,13 +148,13 @@
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Xamarin.Forms" Version="5.0.0.2012" />
-    <PackageReference Include="Microsoft.NETCore.UniversalWindowsPlatform" Version="6.2.12"/>
+    <PackageReference Include="Microsoft.NETCore.UniversalWindowsPlatform" Version="6.2.12" />
     <PackageReference Include="Xamarin.Essentials" Version="1.6.1" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Farm\Farm.csproj">
-      <Project>{54634B03-4121-40D6-BEED-F38C1D3E974D}</Project>
-      <Name>Farm</Name>
+    <ProjectReference Include="..\Farm\OganicInput.csproj">
+      <Project>{5A6C52B2-6606-47AA-8528-FF4C5CE4AB29}</Project>
+      <Name>OganicInput</Name>
     </ProjectReference>
   </ItemGroup>
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '14.0' ">

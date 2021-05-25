@@ -1,4 +1,4 @@
-﻿using Farm.Models;
+﻿using OganicInput.Models;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -6,14 +6,14 @@ using System.Linq;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
-namespace Farm.Views
+namespace OganicInput.Views
 {
-    public partial class FarmPage2 : ContentPage
+    public partial class OganicInputPage2 : ContentPage
     {
         //readonly string _fileName = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "notes.txt");
 
 
-        public FarmPage2()
+        public OganicInputPage2()
         {
             InitializeComponent();
             //// Read the file.

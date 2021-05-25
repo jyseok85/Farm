@@ -2,7 +2,7 @@
 using Xamarin.Essentials;
 using Xamarin.Forms;
 
-namespace Farm.Views
+namespace OganicInput.Views
 {
     public partial class AboutPage : ContentPage
     {

@@ -1,4 +1,4 @@
-﻿using Farm.Models;
+﻿using OganicInput.Models;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
-namespace Farm.Views
+namespace OganicInput.Views
 {
     [QueryProperty(nameof(ItemId), nameof(ItemId))]
     public partial class DisclosureInfoEntryPage : ContentPage

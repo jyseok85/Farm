@@ -22,8 +22,11 @@
     <Compile Update="Views\AboutPageSample.xaml.cs">
       <DependentUpon>AboutPageSample.xaml</DependentUpon>
     </Compile>
-    <Compile Update="Views\FarmPage2.xaml.cs">
-      <DependentUpon>FarmPage2.xaml</DependentUpon>
+    <Compile Update="Views\LoadingView.xaml.cs">
+      <DependentUpon>LoadingView.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="Views\OganicInputPage2.xaml.cs">
+      <DependentUpon>OganicInputPage2.xaml</DependentUpon>
     </Compile>
   </ItemGroup>
 
@@ -34,10 +37,13 @@
     <EmbeddedResource Update="Views\DisclosureInfoEntryPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
-    <EmbeddedResource Update="Views\FarmDetailPage.xaml">
+    <EmbeddedResource Update="Views\LoadingView.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
-    <EmbeddedResource Update="Views\FarmPage.xaml">
+    <EmbeddedResource Update="Views\OganicInputDetailPage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Views\OganicInputPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
   </ItemGroup>

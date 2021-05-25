@@ -1,9 +1,9 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="Farm.Views.FarmPage"
-             xmlns:controls="clr-namespace:Farm.Controls"
-             xmlns:local ="clr-namespace:Farm"
+             x:Class="OganicInput.Views.OganicInputPage"
+             xmlns:controls="clr-namespace:OganicInput.Controls"
+             xmlns:local ="clr-namespace:OganicInput"
              >
     <ContentPage.Resources>
         <Style TargetType="Frame">
@@ -303,8 +303,8 @@
                                 <ColumnDefinition Width="15*" />
                                 <ColumnDefinition Width="12*" />
                             </Grid.ColumnDefinitions>
-                            <!--Source="{local:ImageResource Farm.Resources.FarmSubtitle1.png}"-->
-                            <!--<Image Source="{local:ImageResource Farm.Resources.FarmSubtitle1.png}"
+                            <!--Source="{local:ImageResource OganicInput.Resources.OganicInputSubtitle1.png}"-->
+                            <!--<Image Source="{local:ImageResource OganicInput.Resources.OganicInputSubtitle1.png}"
                     Aspect ="AspectFit"
                     Margin="20,0,0,0"
                     BackgroundColor="Blue"
@@ -428,7 +428,6 @@
 
             <!--라인-->
             <!--<BoxView Grid.Row="2" BackgroundColor="Gray" HeightRequest="1" VerticalOptions="End" />-->
-        <Label x:Name="StatusMessage" IsVisible="false" Text="This app is written in XAML and C# with the Xamarin Platform." />
     </StackLayout>
 
         </Frame>

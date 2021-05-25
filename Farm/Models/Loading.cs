@@ -11,7 +11,7 @@
     using Xamarin.Forms;
     using Xamarin.Forms.Xaml;
 
-    namespace Farm.Models
+    namespace OganicInput.Models
     {
         public partial class Loading 
         {
@@ -104,8 +104,6 @@
                         Save(jsonStr);
                     }
                 }
-                StatusMessage.Text = "작업 완료";
-
                 await Task.Delay(1000);
                 App.DisInfo = savedData;
             }
